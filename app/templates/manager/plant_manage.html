@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>后台管理</title>
+    <link rel="SHORTCUT ICON" href="{{ url_for('static', filename='images2/logo2.jpg') }}">
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+			box-sizing: border-box;
+		}
+		a {
+			text-decoration: none;
+			color: black;
+		}
+		h1 {
+			margin-top: 50px;
+			margin-left: 20px;
+		}
+		.clearfix::after {
+			content: '';
+			display: block;
+			height: 0;
+			clear: both;
+			visibility: hidden;
+		}
+		.table_title {
+			width: 100%;
+			margin: 10px auto 30px 20px;
+		}
+		.table_title div {
+			float: left;
+		}
+		.table_title p {
+			float: left;
+			background-color: #36CEFD;
+			height: 20px;
+			font-size: 14px;
+			text-align: center;
+			line-height: 20px;
+			border-radius: 3px;
+			padding: 0 5px;
+			margin: 0 10px;
+			cursor: pointer;
+		}
+		.table_title p:hover {
+			font-weight: 700;
+		}
+		table .num {
+			text-align: center;
+		}
+		table td {
+			height: 40px;
+		}
+		table tbody tr:nth-child(2n){
+			background-color: #EFEFEF;	
+		}
+		table button {
+			width: 35px;
+			height: 20px;
+			margin-right: 10px;
+			background-color: #33FC73;
+			font-size: 14px;
+			cursor: pointer;
+		}
+		table button:hover {
+			color: red;
+		}
+		table .bnt {
+			padding-left: 10px;
+			width: 12%;
+		}
+		.barrier {
+			height: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>植物导览系统-植物信息管理</h1>
+	<div class="table_title">
+	<div>所有植物种类</div><p><a href="{{ url_for('user.login') }}">返回</a></p><p><a href="">用户管理</a></p><div class="clearfix"></div>
+	</div>
+	<div class="barrier"></div>
+	<div class="table">
+	<table width="100%" border="1" cellspacing="1">
+	<tr style="font-weight: 700; text-align: center;">
+	<td class="num">序号</td>
+	<td>名称</td>
+	<td>学术性简介</td>
+	<td>文学性简介</td>
+	<td>花期</td>
+	<td>花语</td>
+	<td>经度</td>
+	<td>纬度</td>
+	<td>位置</td>
+	<td></td>
+	</tr>
+	<tbody>
+	<tr>
+        {% for item in xianshi %}
+            <td class="num">{{ item.id }}</td>
+	            <td>{{ item.name }}</td>
+	            <td>{{ item.academic }}</td>
+	            <td>{{ item.literary }}</td>
+	            <td>{{ item.time }}</td>
+	            <td>{{ item.language }}</td>
+	            <td>{{ item.longitude }}</td>
+	            <td>{{ item.latitude }}</td>
+	            <td>{{ item.area }}</td>
+	            <td class="bnt"><button><a href = "#">详情</a></button><button><a href = "#">修改</a></button><button><a href = "#">删除</a></button></td></tr>
+        {% endfor %}
+	</table>
+	</div>
+</body>
+</html>

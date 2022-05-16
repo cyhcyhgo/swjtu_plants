@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+    <link rel="SHORTCUT ICON" href="{{ url_for('static', filename='images2/logo2.jpg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user/contribute.css') }}" type="text/css">
+<title>欢迎投稿</title>
+</head>
+
+<body>
+<div class="web" style="background: url({{ url_for('static',filename='sign_image/contri.jpg') }}) no-repeat;">
+	<div class="main w">
+	<div><h3>植物信息</h3><p><a href="{{ url_for('main.index') }}">返回首页</a></p><div class="clearfix"></div></div>
+		<form action="">
+		<li><img src="{{ url_for('static',filename='sign_image/plant_icon.png') }}" alt="" style="height: 100%; width:auto; vertical-align: center;">&nbsp;植物名称</li>
+		<li><input type="text" placeholder="请输入植物名称" ></li>
+		<li><img src="{{ url_for('static',filename='sign_image/location.png') }}" alt="" style="height: 100%; width:auto; vertical-align: center;">&nbsp;发现地点</li>
+		<li><input type="text" placeholder="你是在哪发现它的？" ></li>
+		<li>请在此处给出详细描述：</li>
+		<li><textarea cols="60" rows="2"></textarea></li>
+		<li>请上传植物图片：</li>
+		<li><input type="file" id="pic" placeholder="请上传你的图片"></li>
+		<li><button>提交</button></li>
+		</form>
+	</div>
+</div>
+</body>
+</html>

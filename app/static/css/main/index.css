@@ -1,0 +1,658 @@
+body {
+    position: absolute;
+    width: 100%;
+    height: 2320px;
+}
+
+.whole {
+    position: absolute;
+    width: 1280px;
+    height: auto;
+    margin: 0 50px;
+}
+
+.dh {
+    width: 100%;
+    height: 70px;
+    text-align: left;
+}
+
+.nav {
+    width: 380px;
+    height: 70px;
+    margin: 0 5px 0 0;
+    position: absolute;
+    right: 100px;
+    padding: 0;
+    display: inline;
+}
+
+.nav li {
+    list-style: none;
+    float: right;
+    margin-right: 20px;
+    height: 70px;
+    width: 100px;
+    line-height: 70px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.nav li::before {
+    content: "";
+    width: 100px;
+    height: 40px;
+    background-color: #6592F5;
+    border-radius: 40px;
+    position: absolute;
+    top: 15px;
+    left: 1px;
+    z-index: -1;
+    display: none;
+}
+
+.nav li:hover::before {
+    display: block;
+}
+
+.nav li:hover {
+    color: white;
+}
+
+.tc1 {
+    width: 160px;
+    height: 180px;
+    float: left;
+    position: absolute;
+    display: none;
+    overflow: hidden;
+}
+
+.nav li:hover .tc1,
+.nav li:hover .tc2 {
+    display: block;
+}
+
+.tc11 {
+    width: 160px;
+    height: 105px;
+    line-height: 30px;
+    text-align: left;
+    float: left;
+    color: black;
+    z-index: 200;
+    cursor: pointer;
+}
+
+.tc11-left:hover,
+.tc12-left:hover {
+    background-color: aqua;
+}
+
+.tc2 {
+    width: 100px;
+    height: 60px;
+    float: left;
+    background-color: white;
+    display: none;
+}
+
+.tc21 {
+    width: 100%;
+    height: 30px;
+    float: left;
+    line-height: 30px;
+    color: black;
+    border-bottom: 2px solid #2A2121;
+    cursor: pointer;
+}
+
+.tc22 {
+    width: 100%;
+    height: 30px;
+    float: left;
+    line-height: 30px;
+    color: black;
+    cursor: pointer;
+}
+
+.tc11-left {
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    position: absolute;
+    text-align: center;
+    background-color: white;
+}
+
+.tc11-right {
+    background-color: white;
+    color: black;
+    position: absolute;
+    left: 100px;
+    width: 60px;
+    float: left;
+    z-index: 99;
+    top: 0;
+    height: 84px;
+    text-align: center;
+    display: none;
+}
+
+.tc11:hover .tc11-right {
+    display: block;
+}
+
+.tc12 {
+    width: 160px;
+    height: 60px;
+    position: absolute;
+    top: 30px;
+    cursor: pointer;
+}
+
+.tc12-left {
+    position: absolute;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    background-color: white;
+    border-top: 2px solid black;
+    color: black;
+    text-align: center;
+    left: 0;
+}
+
+.tc12-right {
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    position: absolute;
+    left: 100px;
+    color: black;
+    display: none;
+}
+
+.tc12:hover > .tc12-right {
+    display: block;
+}
+
+.tc11f {
+    margin: 0;
+    width: 100%;
+    height: 20px;
+    font-size: 14px;
+    line-height: 20px;
+    border-bottom: 2px solid #5E5353;
+    cursor: pointer;
+}
+
+.tc11f:hover {
+    background-color: #2CCFF0;
+    color: white;
+    font-weight: bold;
+}
+
+.tc12f {
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    font-size: 14px;
+    background-color: white;
+    border-bottom: 2px solid #75696A;
+    cursor: pointer;
+}
+
+.tc12f:hover {
+    background-color: aqua;
+}
+
+.tc12-left:hover {
+    background-color: aqua;
+}
+
+.tc21:hover,
+.tc22:hover {
+    background-color: aqua;
+}
+
+.sou {
+    display: inline;
+    position: absolute;
+    right: 10px;
+    width: 150px;
+    height: 70px;
+}
+
+#shuru {
+    width: 100px;
+    height: 30px;
+    border: 2px solid #A0E2F8;
+    border-radius: 5px 0 0 5px;
+    position: absolute;
+    right: 40px;
+    top: 20px;
+}
+
+#but {
+    background-color: aqua;
+    height: 30px;
+    font-weight: bold;
+    border-radius: 0 5px 5px 0;
+    position: absolute;
+    right: 5px;
+    top: 20px;
+    cursor: pointer;
+}
+
+.xnjd {
+    position: absolute;
+    left: 65px;
+    display: inline-block;
+}
+
+.web {
+    position: absolute;
+    top: 40px;
+    left: 90px;
+    display: inline-block;
+}
+
+.box {
+    margin-top: 10px;
+    position: relative;
+    width: 1280px;
+    height: 550px;
+}
+
+.box-img {
+    position: absolute;
+    top: 0;
+    left: 40px;
+}
+
+.lbt1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    animation: lbdh1 18s infinite;
+    animation-delay: 0s;
+}
+
+.lbt2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    animation: lbdh2 18s infinite;
+    animation-delay: 5.94s;
+}
+
+.lbt3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    animation: lbdh3 18s infinite;
+    animation-delay: 11.60s;
+}
+
+@keyframes lbdh1 {
+    0% {
+        opacity: 0;
+    }
+    2% {
+        opacity: 1;
+    }
+    32% {
+        opacity: 1;
+    }
+    33% {
+        opacity: 0
+    }
+}
+
+@keyframes lbdh2 {
+    0% {
+        opacity: 0;
+    }
+    2% {
+        opacity: 1;
+    }
+    32% {
+        opacity: 1;
+    }
+    33% {
+        opacity: 0;
+    }
+}
+
+@keyframes lbdh3 {
+    0% {
+        opacity: 0;
+    }
+    2% {
+        opacity: 1;
+    }
+    32% {
+        opacity: 1;
+    }
+    33% {
+        opacity: 0;
+    }
+}
+
+.box-left {
+    position: absolute;
+    height: 70px;
+    width: 35px;
+    top: 250px;
+    background-color: #BCEDEE;
+    color: #ccc;
+    border-radius: 5px 0 0 5px;
+    text-align: center;
+    line-height: 70px;
+    font-size: 27px;
+}
+
+.box-left:hover {
+    background-color: yellow;
+    color: #fff;
+    cursor: pointer;
+}
+
+.box-right {
+    position: absolute;
+    height: 70px;
+    width: 35px;
+    top: 250px;
+    color: #ccc;
+    background-color: #BCEDEE;
+    border-radius: 0 5px 5px 0;
+    text-align: center;
+    line-height: 70px;
+    font-size: 27px;
+    right: 0;
+}
+
+.box-right:hover {
+    background-color: yellow;
+    color: #fff;
+    cursor: pointer;
+}
+
+.box-point > ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.box-point li {
+    width: 14px;
+    height: 14px;
+    border-radius: 100%;
+    float: left;
+    margin-right: 64px;
+    background-color: white;
+}
+
+.box-point {
+    position: absolute;
+    bottom: 16px;
+    left: 555px;
+}
+
+.box-point li:hover {
+    background-color: yellow;
+}
+
+.jieshao {
+    width: 100%;
+    height: 350px;
+    position: relative;
+    margin-top: 50px;
+    background-color: white;
+}
+
+.jieshao1 {
+    position: absolute;
+    width: 300px;
+    height: 100%;
+    left: 28px;
+    background-color: #f20c66;
+    text-align: center;
+    border: 1px solid #464343;
+}
+
+.jieshao2 {
+    position: absolute;
+    width: 300px;
+    height: 100%;
+    left: 336px;
+    background-color: #E0DADA;
+    text-align: center;
+}
+
+.jieshao3 {
+    position: absolute;
+    width: 300px;
+    height: 100%;
+    left: 644px;
+    background-color: #fcfd49;
+    text-align: center;
+}
+
+.jieshao4 {
+    position: absolute;
+    width: 300px;
+    height: 100%;
+    right: 28px;
+    background-color: #de7bbe;
+    text-align: center;
+}
+
+.nr {
+    margin: 0 10px 10px 10px;
+}
+
+.bt {
+    line-height: 5px;
+}
+
+.footer {
+    width: 100%;
+    height: 150px;
+    background-color: #B1F5F7;
+    margin: 5px 0 0 0;
+    position: absolute;
+    bottom: 0;
+}
+
+.footer-left {
+    width: 300px;
+    height: 100%;
+    position: absolute;
+    left: 10px;
+}
+
+.footer-right {
+    width: 1050px;
+    height: 100%;
+    position: absolute;
+    right: 10px;
+    border: 2px solid black;
+
+}
+
+.ft-content {
+    margin-left: 10px;
+    line-height: 10px;
+}
+
+.link:link {
+    color: black;
+    text-decoration: none;
+}
+
+.link:hover {
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.link:active {
+    color: white;
+    font-weight: bold;
+}
+
+.lianxi {
+    position: absolute;
+    top: 15px;
+    font-weight: bold;
+    right: 30px;
+}
+
+.map {
+    position: relative;
+    width: 1280px;
+    height: 600px;
+    margin-top: 20px;
+}
+
+.map-title {
+    width: 110px;
+    height: 20px;
+    position: absolute;
+    left: 0;
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.erweima {
+    position: absolute;
+    right: 10px;
+    top: 40px;
+}
+
+.touxiang {
+    position: absolute;
+    top: 0;
+    right: 120px;
+    margin-bottom: 5px;
+}
+
+.map_image {
+    position: absolute;
+    top: 65px;
+}
+
+.jieshao_title {
+    position: relative;
+    width: 200px;
+    height: 30px;
+    left: 5px;
+}
+
+.dbfk1 {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    bottom: 220px;
+    left: 550px;
+}
+
+.dbfk2 {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 90px;
+    right: 140px;
+}
+
+.dbfk3 {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    bottom: 200px;
+    left: 690px;
+}
+
+.dbfk4 {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    bottom: 200px;
+    left: 930px;
+}
+
+.dbfk5 {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    bottom: 80px;
+    right: 200px;
+}
+
+.db {
+    position: absolute;
+    bottom: 15px;
+    right: 5px;
+}
+
+.wenben {
+    position: absolute;
+    width: 200px;
+    height: 150px;
+    left: 0;
+    bottom: 0;
+    display: none;
+    cursor: pointer;
+}
+
+.dbfk1:hover > .wenben {
+    display: block;
+}
+
+.dbfk2:hover > .wenben {
+    display: block;
+}
+
+.dbfk3:hover > .wenben {
+    display: block;
+}
+
+.dbfk4:hover > .wenben {
+    display: block;
+}
+
+.dbfk5:hover > .wenben {
+    display: block;
+}
+
+#web_bgshouye {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-width: 1000px;
+    z-index: -10;
+    zoom: 1;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-position: center 0;
+}
+#index_image{
+    float: left;
+    width: 400px;
+}
+#weather{
+    float: left;
+    margin: 23px;
+}

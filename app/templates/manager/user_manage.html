@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>后台管理</title>
+    <link rel="SHORTCUT ICON" href="{{ url_for('static', filename='images2/logo2.jpg') }}">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        h1 {
+            margin-top: 50px;
+            margin-left: 20px;
+        }
+
+        .clearfix::after {
+            content: '';
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+
+        .table_title {
+            width: 100%;
+            margin: 10px auto 30px 20px;
+        }
+
+        .table_title div {
+            float: left;
+        }
+
+        .table_title p {
+            float: left;
+            background-color: #36CEFD;
+            height: 20px;
+            font-size: 14px;
+            text-align: center;
+            line-height: 20px;
+            border-radius: 3px;
+            padding: 0 5px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        .table_title p:hover {
+            font-weight: 700;
+        }
+
+        table .num {
+            text-align: center;
+        }
+
+        table td {
+            height: 40px;
+            text-align: center;
+        }
+
+        table tbody tr:nth-child(2n) {
+            background-color: #EFEFEF;
+        }
+
+        table button {
+            width: 35px;
+            height: 20px;
+            margin-right: 10px;
+            background-color: #33FC73;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        table button:hover {
+            color: red;
+        }
+
+        table .bnt {
+            padding-left: 10px;
+            width: 12%;
+        }
+
+        .barrier {
+            height: 10px;
+        }
+        #check {
+            left: 0;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            color: #fff;
+            outline: none;
+            background: #fff;
+            cursor: pointer;
+            /* -webkit-appearance: none;*/
+        }
+    </style>
+</head>
+
+<body>
+<h1>植物导览系统-用户信息管理</h1>
+<div class="table_title">
+    <div style="display: none">所有植物种类</div>
+    <p><a href="{{ url_for('user.login') }}">返回</a></p>
+    <div class="clearfix"></div>
+</div>
+<div class="barrier"></div>
+<div class="table">
+        <table id='table2' width="100%" border="1" cellspacing="1">
+            <tr style="font-weight: 700; text-align: center;">
+                <td class="num">用户ID</td>
+                <td>用户名</td>
+                <td>密码</td>
+                <td>是否为管理员</td>
+                <td>操作</td>
+            </tr>
+            <tbody>
+            {% for item in xianshi %}
+                <tr>
+                    <td class="num">{{ item.id }}</td>
+                    <td>{{ item.username }}</td>
+                    <td>{{ item.password }}</td>
+                    <td>{{ item.isAdministrator }}</td>
+                    <td class="bnt">
+                        <div id="count" style="display: none">{{ item.count }}</div>
+                        <button data-toggle="modal" data-target="#myModal" onclick="prepare(this.parentElement.firstElementChild)"><a href="#">修改</a></button>
+                        <button onclick="confirmDelete(this.parentElement.firstElementChild)"><a href="#">删除</a></button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">修改用户信息</h4>
+            </div>
+            <form id='user' method="post" action="{{ url_for('manager.edit') }}">
+                <div class="modal-body">
+                    {{ form.hidden_tag() }}
+                    <p>用户ID：{{ form.user_id(id='user_id', type="text", readonly="readonly", style="border-style: none; outline: none") }}</p>
+                    <p>用户名：{{ form.name(id='name') }} </p>
+                    <p>密&emsp;码：{{ form.password(id='password') }} </p>
+                    <p>是否为管理员：{{ form.isAdministrator(id='isAdministrator') }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button  type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="onSubmit('/manager/edit')">提交</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+    <script>
+        function confirmDelete(obj) {
+            const id = obj.innerText;
+            const w = confirm("确认要删除此用户吗？");
+            if (w===true){
+                document.getElementById("user_id").value=document.getElementById("table2").rows[id].cells[0].innerText;
+                onSubmit('/manager/delete');
+            }
+        }
+        //此函数用于获取用户信息，传递给模态窗口
+        function prepare(obj) {
+            var id= obj.innerText;
+            document.getElementById("user_id").value=document.getElementById("table2").rows[id].cells[0].innerText;
+            document.getElementById("name").value=document.getElementById("table2").rows[id].cells[1].innerText;
+            document.getElementById("password").value=document.getElementById("table2").rows[id].cells[2].innerText;
+            document.getElementById("isAdministrator").checked=(document.getElementById("table2").rows[id].cells[3].innerText) === '是' ;
+        }
+        function onSubmit(route){
+            $.ajax({
+                type: 'GET',
+                url: route,
+                dataType: 'json',
+                data: $('#user').serialize(),
+                success: function(res){
+                    alert(res.message);
+                    if (res.isJump){
+                        window.open("{{ url_for("manager.user_manage")}}", "_self");
+                    }
+                },
+                error: function(){
+                    alert('网络异常')
+                }
+            })
+	    }
+    </script>
+</div><!-- /.modal -->
+</body>
+</html>

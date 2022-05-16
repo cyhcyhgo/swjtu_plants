@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="zh_CN">
+<head>
+    <meta charset="utf-8">
+    <title>西南交通大学植物导览网站</title>
+    <link rel="SHORTCUT ICON" href="{{ url_for('static', filename='images2/logo2.jpg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main/index.css') }}" type="text/css">
+</head>
+
+<body>
+<div class="whole">
+    <div class="dh">
+        <div id="index_image">
+             <img src="{{ url_for('static', filename='images1/logo.png') }}" width="auto" height="70" class="logo" alt="">
+        <img src="{{ url_for('static', filename='images2/西南交通大学.png') }}" height="40" width="auto" class="xnjd" alt="">
+        <img src="{{ url_for('static', filename='images1/植物导览网站.png') }}" height="30" width="auto" class="web" alt="">
+
+        </div>
+                <iframe id="weather" width="300" scrolling="no" height="30" frameborder="0" allowtransparency="true" src="https://i.tianqi.com?c=code&id=34&icon=1&py=pixian&site=12"></iframe>
+
+       <form class="nav" method="post" action="{{ url_for('main.t2') }}">
+            <div style="display: none">
+                {{ form2.hidden_tag() }}
+                {{ form2.key }}
+                {{ form2.submit2 }}
+            </div>
+            <ul class="nav">
+                <li onclick="window.open('{{ url_for('user.login') }}', '_self')">登录</li>
+                <li>
+                    植物概览
+                    <div class="tc2">
+                        <div class="tc21" onclick="capture(this)">
+                            木本植物
+                        </div>
+                        <div class="tc22" onclick="capture(this)">
+                            草本植物
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    区域选择
+                    <div class="tc1">
+                        <div class="tc11">
+                            <div class="tc11-left">学习区</div>
+                            <div class="tc11-right">
+                                <div class="tc11f" onclick="capture(this)">教学楼</div>
+                                <div class="tc11f" onclick="capture(this)">图书馆</div>
+                                <div class="tc11f" onclick="capture(this)">实验楼</div>
+                                <div class="tc11f" onclick="capture(this)">河岸</div>
+                            </div>
+                        </div>
+                        <div class="tc12">
+                            <div class="tc12-left" onclick="capture(this)">生活区</div>
+                            <div class="tc12-right">
+                                <div class="tc12f" onclick="capture(this)">服务区</div>
+                                <div class="tc12f" onclick="capture(this)">天佑斋</div>
+                                <div class="tc12f" onclick="capture(this)">鸿哲斋</div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <script>
+                    function capture(data) {
+                        document.getElementById("mystery_m").value=data.innerText;
+                        document.getElementById("mystery_b").click();
+                    }
+                </script>
+            </ul>
+        </form>
+        <form class="sou" method="post" action="{{ url_for('main.t1') }}">
+            {{ form.hidden_tag() }}
+            {{ form.key }}
+            {{ form.submit1 }}
+            <script>
+                document.getElementById("shuru").value='银杏';
+                let inputBox = document.getElementById("shuru");
+                inputBox.addEventListener("keyup", function (event) {
+                    event.preventDefault();
+                    if (event.keyCode === 13) {
+                        document.getElementById("but").click();
+                    }
+                });
+            </script>
+        </form>
+    </div>
+    <div class="box">
+        <div id="web_bgshouye" style="background-image: url({{ url_for('static', filename='images1/背景.png') }});">
+        </div>
+        <div class="box-img">
+            <img src="{{ url_for('static', filename='images1/intro1.png') }}" width="1200px" height="550px" alt=""
+                 class="lbt1"/>
+            <img onclick="open1()" src="{{ url_for('static', filename='images1/银杏.png') }}" width="1200px"
+                 height="550px" alt="" class="lbt2"/>
+            <img onclick="open2()" src="{{ url_for('static', filename='images1/海棠.png') }}" width="1200px"
+                 height="550px" alt="" class="lbt3"/>
+            <script>
+                function open1() {
+                    window.open("{{ url_for("main.season", id=1) }}", "_self");
+                }
+
+                function open2() {
+                    window.open("{{ url_for("main.season", id=2) }}", "_self");
+                }
+            </script>
+        </div>
+        <div class="box-left">&lt;</div>
+        <div class="box-right">&gt;</div>
+        <div class="box-point">
+            <ul class="point">
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+    <div class="jieshao_title"><img src="{{ url_for('static', filename='images1/热搜植物.png') }}" alt="" width="200px"/>
+    </div>
+    <div class="jieshao">
+        <div class="jieshao1"><p class="bt"><strong>科名：</strong>山茶科 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>种名：</strong>山茶
+        </p>
+            <p class="nr"><strong>特点：</strong><span style="font-size: 14px">常绿灌木或小乔木，嫩枝无毛。叶无毛，先端略尖，基部呈阔楔形，腹部深绿色，背面浅绿色，边缘有相隔3厘米的细锯齿。花顶生，红色，无柄；苞片及萼片约10片，花瓣较多，外侧两片近圆形，花期1-4月。</span>
+            </p>
+            <img src="{{ url_for('static', filename='images1/山茶.png') }}" width="90%" alt="">
+        </div>
+        <div class="jieshao2">
+            <p class="bt">
+                <strong>科名：</strong>蔷薇科&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>种名：</strong>大岛樱</p>
+            <p class="nr"><strong>特点：</strong><span style="font-size: 14px">树高可达15米。花期3月中旬,花叶同开。花白色,花瓣共五瓣，呈伞房状开放。花蕊相对花瓣更小，雌蕊较多。萼筒呈长钟形,萼片呈披针形,边绿有锯齿,花整体无毛。</span>
+            </p>
+            <img src="{{ url_for('static', filename='images1/大岛樱.png') }}" style="width: 90%; margin-top: 22px;" alt="">
+        </div>
+        <div class="jieshao3">
+            <p class="bt">
+                <strong>科名：</strong>木犀科&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>种名：</strong>迎春</p>
+            <p class="nr"><strong>特点：</strong><span style="font-size: 14px">蔓生植物，蔓上有绿色的尖刺，叶片较小，呈椭圆状卵形，边缘有细毛，顶端微尖。整体植株较为高大，可达5米。花呈黄色，花瓣10片，花芯较小，花着生生枝条的叶腋，有绿色苞片。</span>
+            </p>
+            <img src="{{ url_for('static', filename='images1/迎春.png') }}" width="90%" height="auto" alt=""></div>
+        <div class="jieshao4">
+            <p class="bt">
+                <strong>科名：</strong>豆科&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>种名：</strong>胡枝子</p>
+            <p class="nr"><strong>特点：</strong><span style="font-size: 14px">直立灌木,高1-3米,多分枝。三片复叶;托叶2枚,线状披针形;先端钝圆或微凹,具短刺尖。总状花序腋生,构成大型、较疏松的圆锥花序;花冠红紫色,先端微凹,翼瓣较短,基部具较长的瓣柄;荚果斜倒卵形,稍扁。
+			</span></p>
+            <img src="{{ url_for('static', filename='images1/胡枝子.png') }}" width="90%" height="auto" alt=""></div>
+    </div>
+    <div class="map">
+        <div class="map-title"><img src="{{ url_for('static', filename='images1/植物分布地图.png') }}" alt="" width="200px"/>
+        </div>
+        <img src="{{ url_for('static', filename='images1/地图.png') }}" alt="" width="1280px" class="map_image"/>
+        <div class="dbfk1"><img src="{{ url_for('static', filename='images1/地标.png') }}" width="30px" alt=""
+                                class="db"/>
+            <div class="wenben"><a href="{{ url_for("main.season",id=11)}}"><img src="{{ url_for('static', filename='images1/玉兰方框.png') }}"
+                                                          alt="" width="100%"/></a>
+            </div>
+        </div>
+        <div class="dbfk2"><img src="{{ url_for('static', filename='images1/地标.png') }}" width="30px" alt=""
+                                class="db"/>
+            <div class="wenben"><a href="{{ url_for("main.season",id=6)}}"><img src="{{ url_for('static', filename='images1/桂花方框.png') }}"
+                                                           alt="" width="100%"/></a>
+            </div>
+        </div>
+        <div class="dbfk3"><img src="{{ url_for('static', filename='images1/地标.png') }}" width="30px" alt=""
+                                class="db"/>
+            <div class="wenben"><a href="{{ url_for("main.season",id=18)}}"><img src="{{ url_for('static', filename='images1/荷花方框.png') }}"
+                                                          alt="" width="100%"/></a>
+            </div>
+        </div>
+        <div class="dbfk4"><img src="{{ url_for('static', filename='images1/地标.png') }}" width="30px" alt=""
+                                class="db"/>
+            <div class="wenben"><a href="{{ url_for("main.season",id=8)}}"><img src="{{ url_for('static', filename='images1/垂柳方框.png') }}"
+                                                            alt="" width="100%"/></a>
+            </div>
+        </div>
+        <div class="dbfk5"><img src="{{ url_for('static', filename='images1/地标.png') }}" width="30px" alt=""
+                                class="db"/>
+            <div class="wenben"><a href="{{ url_for("main.season",id=3)}}"><img src="{{ url_for('static', filename='images1/石楠方框.png') }}"
+                                                           alt="" width="100%"/></a>
+            </div>
+        </div>
+
+    </div>
+    <img src="{{ url_for('static', filename='images1/banner.png') }}" width="100%" height="auto" alt="">
+</div>
+<div class="footer">
+    <div class="footer-left">
+        <img src="{{ url_for('static', filename='images1/logo.png') }}" style="height: 100px;margin: 20px 0 0 20px;"
+             alt="">
+        <img src="{{ url_for('static', filename='images1/西南交通大学.png') }}"
+             style="height: 35px; position: absolute; top:40px; left: 125px;" alt="">
+        <img src="{{ url_for('static', filename='images1/植物导览网站.png') }}"
+             style="height:40px; position: absolute;top: 70px;left: 113px;" alt="">
+    </div>
+    <div class="footer-right">
+        <table width="100%" border="1" cellspacing="0">
+            <tbody>
+            <tr>
+                <th style="width:105px;" scope="col">快速选区</th>
+                <td style="width: 226.5px;text-align: left;" scope="col">
+                    <p class="ft-content">1&nbsp;&nbsp;<a href="{{ url_for('main.fenlei', keyword='教学楼') }}" class="link">教学楼</a></p>
+                    <p class="ft-content">2&nbsp;&nbsp;<a href="{{ url_for('main.fenlei', keyword='图书馆') }}" class="link">图书馆</a></p>
+                    <p class="ft-content">3&nbsp;&nbsp;<a href="{{ url_for('main.fenlei', keyword='实验楼') }}" class="link">实验楼</a></p>
+                    <p class="ft-content">4&nbsp;&nbsp;<a href="{{ url_for('main.fenlei', keyword='河岸') }}" class="link">河岸</a></p>
+                    <p class="ft-content">5&nbsp;&nbsp;<a href="{{ url_for('main.fenlei', keyword='服务区') }}" class="link">服务区</a></p>
+                </td>
+                <th style="width:105px;" scope="col">热搜植物</th>
+                <td style="width: 262.5px;" scope="col">
+                    <p class="ft-content">1&nbsp;&nbsp;<a href="{{ url_for("main.season",id=9)}}" class="link">迎春</a></p>
+                    <p class="ft-content">2&nbsp;&nbsp;<a href="{{ url_for("main.season",id=5)}}" class="link">桃花</a></p>
+                    <p class="ft-content">3&nbsp;&nbsp;<a href="{{ url_for("main.season",id=18)}}" class="link">荷花</a></p>
+                    <p class="ft-content">4&nbsp;&nbsp;<a href="{{ url_for("main.season",id=10)}}" class="link">梅花</a></p>
+                    <p class="ft-content">5&nbsp;&nbsp;<a href="{{ url_for("main.season",id=11)}}" class="link">玉兰</a></p>
+                </td>
+                <th style="width: 105px;" scope="col"><a href="{{ url_for("user.contribute")}}" class="link">向我投稿</a></th>
+                <td style="width: 150px;" scope="col">
+                    <p class="ft-content">植物照片</p>
+                    <p class="ft-content">优美文案</p>
+                </td>
+                <td style="width: 375px;">
+                    <div class="lianxi">找到我们</div>
+                    <div class="touxiang"><img src="{{ url_for('static', filename='images1/头像.png') }}" alt=""
+                                               width="180px" height="auto"/></div>
+                    <div class="erweima"><img src="{{ url_for('static', filename='images1/二维码.jpg') }}" alt=""
+                                              width="100px"/></div>
+                    <div style="position: relative; margin-top: 40px;"><strong>email:</strong><span
+                            style="font-size: 15px;">2233043607@qq.com</span></div>
+                    <div style="position: relative; margin-top: 5px;">&nbsp;&nbsp;&nbsp;@copyright 星尘工作室</div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8"/>
+    <title>西南交大植物分布概况</title>
+    <link rel="SHORTCUT ICON" href="{{ url_for('static', filename='images2/logo2.jpg') }}">
+    <!-- 引入刚刚下载的 ECharts 文件 -->
+    <script src="{{ url_for('static', filename='files/echarts.js') }}"></script>
+</head>
+<body>
+<!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+<div id="main" style="width: 600px;height:400px;"></div>
+<script type="text/javascript">
+    // 基于准备好的 dom，初始化 echarts 实例
+    var myChart = echarts.init(document.getElementById('main'));
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: '西南交通大学植物分布概况'
+        },
+        tooltip: {},
+        legend: {
+            data: ['数量']
+        },
+        xAxis: {
+            data: ['教学楼', '图书馆', '生活区', '河岸']
+        },
+        yAxis: {},
+        series: [
+            {
+                name: '销量',
+                type: 'pie',
+                data: [5, 20, 4, 10]
+            }
+        ]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh_CN">
+<head>
+<meta charset="utf-8">
+<title>植物档案馆</title>
+<link rel="SHORTCUT ICON" href="{{ url_for('static', filename='images2/logo2.jpg') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main/fenlei.css') }}" type="text/css">
+</head>
+
+<body>
+	<div class="wrapper">
+    <div id="web_bg" style="background-image: url({{ url_for('static', filename='image_search/background_fenlei.jpg') }});">
+		</div>
+ </div>
+<div class="whole_search">
+	<div class="dh_search">
+		<img src="{{ url_for('static', filename='images1/logo.png') }}" height="70px" alt=""> 
+		<img src="{{ url_for('static', filename='images2/西南交通大学.png') }}" height="40" width="auto" class="xnjd" alt="">
+		<img src="{{ url_for('static', filename='images1/植物导览网站.png') }}" height="30" width="auto" class="web" alt="">
+		<form class="sou" method="post" action="{{ url_for('main.t1') }}">
+            {{ form.hidden_tag() }}
+            {{ form.key }}
+            {{ form.submit1 }}
+		<script>
+            const inputBox = document.getElementById("shuru");
+            inputBox.addEventListener("keyup", function(event) {
+				event.preventDefault();
+				if (event.keyCode === 13) {
+				document.getElementById("but").click();
+			}
+			});
+			window.onload=function(){
+                document.getElementById("search_ts").innerHTML="已显示"+ {{ count }}+"个结果";
+				document.getElementById("right").style.height=String(String(165* {{ count }})+"px");
+            }
+		</script>
+		</form>
+		<div class="fh" onclick="goBack()" style="background-image: url({{ url_for('static', filename='image_search/button3.png') }});">返回</div>
+		<script>
+			function goBack(){
+				window.open("{{ url_for("main.index")}}","_self");
+			}
+		</script>
+	</div>
+	<div class="xianshi">
+	<form class="left" method="post" action="{{ url_for('main.t2') }}">
+        <div style="display: none">
+            {{ form2.hidden_tag() }}
+            {{ form2.key }}
+            {{ form2.submit2 }}
+        </div>
+		<div class=" zbk jx" onclick="capture(this)">教学楼</div>
+		<div class=" zbk tushu" onclick="capture(this)">图书馆</div>
+		<div class=" zbk shiyan" onclick="capture(this)">实验楼</div>
+		<div class=" zbk gongxun" onclick="capture(this)">河岸</div>
+		<div class=" zbk fuwuqu" onclick="capture(this)">服务区</div>
+		<div class=" zbk tianyouzhai" onclick="capture(this)">天佑斋</div>
+		<div class=" zbk hongzhezhai" onclick="capture(this)">鸿哲斋</div>
+		<div class=" zbk mubeng" onclick="capture(this)">木本植物</div>
+		<div class=" zbk caobeng" onclick="capture(this)">草本植物</div>
+		<script>
+			function capture(data) {
+				document.getElementById("mystery_m").value=data.innerText;
+                document.getElementById("mystery_b").click();
+			}
+		</script>
+</form>
+		<div class="right">
+            <div id="search_ts">加载中，请稍后</div>
+			<div class="liebiao 1">
+                {% for item in xianshi %}
+                    <div class="xh" onclick="window.open('{{ item.href }}','_self');">
+                        <div class="xuhao">{{ item.k }} </div>
+                        <div class="top">
+                            <img src="{{item.image}}"  style="width: 100%;" alt=""></div>
+                        <div class="bot"><p class="xinxi"><strong>{{ item.type }}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>种名：</strong>{{ item.name }}</p>
+                        <p class="xinxi"><strong>花期：</strong>{{ item.time }}</p>
+                        <p class="tag">图书馆 服务区 天佑斋 鸿哲斋</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+			</div>
+    </div>
+</div>
+</body>
+</html>
