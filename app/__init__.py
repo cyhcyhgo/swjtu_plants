@@ -5,6 +5,7 @@ from .config import Config
 
 
 def create_app(configName = "default"):
+    """初始化app实例"""
     app = Flask(__name__)
     # 加载配置文件内容
     ConfigDic = Config()

@@ -6,6 +6,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
+    """载入配置数据"""
     WTF_CSRF_SECRET_KEY = os.environ.get('WTF_CSRF_SECRET_KEY') or '654321'
     SECRET_KEY = os.environ.get('SECRET_KEY') or '123456'
     SQLALCHEMY_DATABASE_URI = ''
@@ -19,6 +20,7 @@ class Config:
         pass
 
     def __init__(self):
+        """从config.ini中读取配置项"""
         cf = configparser.ConfigParser()
         cf.read(basedir + r'\config.ini', encoding='utf-8')
         mysql_host = cf.get("mysql", "host")
