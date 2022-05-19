@@ -1,9 +1,9 @@
 from flask import render_template, url_for, redirect, Blueprint
 import os
 import configparser
-from app.forms import spring_style, summer_style, autumn_style, winter_style, Search, Fenlei, Style
-from app.models import Plants, Info, Position, Picture, initial_database
-from app.extensions import db
+from App.forms import spring_style, summer_style, autumn_style, winter_style, Search, Fenlei, Style
+from App.models import Plants, Info, Position, Picture, initial_database
+from App.extensions import db
 
 main = Blueprint('main', __name__)
 basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))

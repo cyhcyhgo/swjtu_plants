@@ -6,3 +6,9 @@ Flask_WTF==1.0.1
 openpyxl==3.0.9
 Pillow==9.1.1
 WTForms==3.0.1
+
+app~=0.0.1
+MyApplication~=0.1.0
+Werkzeug~=1.0.1
+config~=0.5.1
+itsdangerous~=1.1.0

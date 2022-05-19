@@ -119,7 +119,7 @@
             <tr style="font-weight: 700; text-align: center;">
                 <td class="num">用户ID</td>
                 <td>用户名</td>
-                <td>密码</td>
+                <td>密码（哈希值）</td>
                 <td>是否为管理员</td>
                 <td>操作</td>
             </tr>
@@ -176,7 +176,7 @@
             var id= obj.innerText;
             document.getElementById("user_id").value=document.getElementById("table2").rows[id].cells[0].innerText;
             document.getElementById("name").value=document.getElementById("table2").rows[id].cells[1].innerText;
-            document.getElementById("password").value=document.getElementById("table2").rows[id].cells[2].innerText;
+            document.getElementById("password").placeholder = '请输入新密码';
             document.getElementById("isAdministrator").checked=(document.getElementById("table2").rows[id].cells[3].innerText) === '是' ;
         }
         function onSubmit(route){

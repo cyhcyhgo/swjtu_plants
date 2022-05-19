@@ -6,6 +6,7 @@ from .plant import Plants, Info, Position, Picture
 
 
 def initial_database(database):
+    """从Excel读取数据，初始化数据库"""
     del_list = [Plants, Info, Position, Picture]
     for table in del_list:
         for member in table.query.all():
@@ -37,8 +38,10 @@ def initial_database(database):
         database.session.add(p3)
         database.session.add(p4)
         i = i + 1
-    # p5 = Users(id=1, username='CYH', password='123456', isAdministrator=1)
-    # p6 = Users(id=2, username='GX', password='654321', isAdministrator=0)
+    # for member in Users.query.all():
+    #     database.session.delete(member)
+    # p5 = Users(id=1, username='CYH', password='123456', isAdministrator=1, confirmed=True)
+    # p6 = Users(id=2, username='GX', password='654321', isAdministrator=0, confirmed=True)
     # database.session.add(p5)
     # database.session.add(p6)
     database.session.commit()

@@ -30,4 +30,4 @@ class Config:
         mysql_password = cf.get("mysql", "password")
         self.SQLALCHEMY_DATABASE_URI = \
             'mysql+pymysql://{a}:{b}@{c}:{d}/{e}?charset=utf8'.format(a=mysql_user, b=mysql_password,
-                                                         c=mysql_host, d=mysql_port, e=mysql_db_name)
+                                                                      c=mysql_host, d=mysql_port, e=mysql_db_name)
