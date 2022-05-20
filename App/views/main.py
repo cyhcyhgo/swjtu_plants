@@ -4,6 +4,7 @@ import configparser
 from App.forms import spring_style, summer_style, autumn_style, winter_style, Search, Fenlei, Style
 from App.models import Plants, Info, Position, Picture, initial_database
 from App.extensions import db
+from flask_login import current_user
 
 main = Blueprint('main', __name__)
 basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
@@ -24,6 +25,7 @@ def index():  # 首页
         print("!")
     form = Search()
     form2 = Fenlei()
+    print(current_user.is_authenticated)
     return render_template(
         'main/index.html', form=form, form2=form2
     )
@@ -120,9 +122,9 @@ def fenlei(keyword):
     )
 
 
-# index中跳转到“搜索”界面提交的表单
 @main.route('/t1', methods=('GET', 'POST'))
 def t1():
+    """index中跳转到“搜索”界面提交的表单"""
     form = Search()
     if form.validate_on_submit():
         if form.data['key'] == '':
@@ -133,17 +135,17 @@ def t1():
     return redirect(url_for('main.search_2', keyword='any'))
 
 
-# index中跳转到“分类”网页提交的表单
 @main.route('/t2', methods=('GET', 'POST'))
 def t2():
+    """index中跳转到“分类”网页提交的表单"""
     form2 = Fenlei()
     if form2.validate_on_submit():
         return redirect(url_for('main.fenlei', keyword=form2.data['key']))
 
 
-# 选择季节
 @main.route('/season/<id>', methods=('GET', 'POST'))
 def season(id):
+    """详情页面"""
     form = Search()
     plant = Plants.query.filter_by(id=id).first()
     position = Position.query.filter_by(id=id).first()

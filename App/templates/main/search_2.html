@@ -25,7 +25,7 @@
             const inputBox = document.getElementById("shuru");
             inputBox.addEventListener("keyup", function(event) {
 				event.preventDefault();
-				if (event.keyCode === 13) {
+				if (event.key === 'Enter') {
 				document.getElementById("but").click();
 			}
 			});

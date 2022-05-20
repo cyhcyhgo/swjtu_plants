@@ -1,9 +1,8 @@
-from flask import Flask, render_template, url_for, redirect, request, session, jsonify, Blueprint
+from flask import render_template, request, session, jsonify, Blueprint
 
+from App.extensions import db
 from App.forms import Manage_user_info
 from App.models import Plants, Info, Position, Picture, Users
-from App.extensions import db
-
 
 manager = Blueprint('manager', __name__)
 

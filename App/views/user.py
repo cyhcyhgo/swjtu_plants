@@ -1,3 +1,5 @@
+from flask_login import login_user, login_required, current_user
+
 from App.views import verificationCode
 from flask import render_template, session, Blueprint
 
@@ -27,18 +29,17 @@ def login():
     is_administrator = 0
     if form.validate_on_submit():
         username = form.data['name']
-        current_user = Users.query.filter(Users.username == username).first()
+        user_from_db = Users.query.filter(Users.username == username).first()
         is_administrator = int(form.data['isAdministrator'])
-        if current_user:
-            if current_user.verify_password(form.data['password']):
-                if current_user.isAdministrator == 0 and is_administrator:
+        if user_from_db:
+            if user_from_db.verify_password(form.data['password']):
+                if user_from_db.isAdministrator == 0 and is_administrator:
                     message = '您不是管理员'
                     is_alert = 1
                 else:
-                    message = '欢迎回来，' + current_user.username
-                    session['user_name'] = current_user.username
-                    session['user_id'] = current_user.id
+                    message = '欢迎回来，' + user_from_db.username
                     session.permanent = True  # 默认为 31 天
+                    login_user(user_from_db, remember=form.remember.data)
                     is_alert = 1
                     is_jump = 1
             else:
@@ -66,11 +67,11 @@ def reg():
         password = form.data['password']
         password2 = form.data['password2']
         captcha = form.data['captcha'].lower()
-        current_user = Users.query.filter(Users.username == username).first()
+        user_from_db = Users.query.filter(Users.username == username).first()
         if captcha != session['imageCode'].lower():
             is_alert = 1
             message = '验证码错误'
-        elif current_user:
+        elif user_from_db:
             is_alert = 1
             message = '该用户已经存在'
         elif password != password2:
@@ -90,8 +91,8 @@ def reg():
 
 
 @user.route('/contribute', methods=('GET', 'POST'))
+@login_required
 def contribute():  # put application's code here
-
     return render_template(
         'user/contribute.html'
     )

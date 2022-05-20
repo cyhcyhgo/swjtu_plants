@@ -1,3 +1,4 @@
+@charset "utf-8";
 body {
     position: absolute;
     width: 100%;
@@ -483,9 +484,18 @@ body {
     height: 100%;
     position: absolute;
     right: 10px;
-    border: 2px solid black;
 
 }
+
+#footer-table {
+    border:solid #000000; border-width:1px 0 0 1px;
+}
+
+#footer-table th,td{
+    border:solid #000000; border-width:0 1px 1px 0;
+    padding-left: 1px;
+}
+
 
 .ft-content {
     margin-left: 10px;
@@ -648,11 +658,15 @@ body {
     -o-background-size: cover;
     background-position: center 0;
 }
-#index_image{
+
+#index_image {
     float: left;
     width: 400px;
 }
-#weather{
+
+#weather {
     float: left;
     margin: 23px;
+    overflow: hidden;
+    border: medium none;
 }

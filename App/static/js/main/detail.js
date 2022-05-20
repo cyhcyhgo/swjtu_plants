@@ -24,6 +24,7 @@ function mini_map() {
 
 
 function initial(x1, y1) {
+    /// 初始化经纬度
     x = x1;
     y = y1;
 }

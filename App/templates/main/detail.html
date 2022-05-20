@@ -5,6 +5,7 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
     <title>植物概览</title>
     <link rel="SHORTCUT ICON" href="{{ url_for('static', filename='images2/logo2.jpg') }}">
+    <script src="{{ url_for('static', filename='files/jquery-3.6.0.min.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main/detail.css') }}" type="text/css">
     <style>
         .button {
@@ -13,31 +14,13 @@
             background-repeat: no-repeat;
             background-size: contain;
             background-position: center;
-        }
-        #shuru {
-            width: 100px;
-            height: 30px;
-            border: 2px solid{{ style.input_color }};
-            border-radius: 5px 0 0 5px;
-            position: absolute;
-            right: 50px;
-            top: 20px;
-        }
-
-        #but {
-            background-color: {{ style.button_color }};
-            border: 2px solid{{ style.button_border }};
-            height: 30px;
-            font-weight: bold;
-            border-radius: 0 5px 5px 0;
-            position: absolute;
-            right: 15px;
-            top: 20px;
-            cursor: pointer;
+            text-align: center;
+            padding: 35px;
         }
     </style>
     <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
-    <script src="https://webapi.amap.com/maps?v=1.4.15&key=12387a9d8a0471196ba9bee015f9a52e&plugin=AMap.Walking"></script>
+    <script
+        src="https://webapi.amap.com/maps?v=1.4.15&key=12387a9d8a0471196ba9bee015f9a52e&plugin=AMap.Walking"></script>
     <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
     <script src="{{ url_for('static', filename='js/main/detail.js') }}"></script>
 </head>
@@ -49,137 +32,163 @@
     </div>
     <!--其他代码 ... -->
 </div>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tbody>
-    <tr>
-        <td>
-            <table width="100%" border="0" height="50px" cellspacing="0" cellpadding="0">
-                <tbody>
-                <form method="post" action="{{ url_for('main.t1') }}">
-                    {{ form.hidden_tag() }}
+<form method="post" action="{{ url_for('main.t1') }}">
+    {{ form.hidden_tag() }}
+    <table style="width: 100%; height: 50px; border-spacing: 0;">
+        <tbody>
+        <tr>
+            <td>
+                <table style="width: 100%; height: 50px; border-spacing: 0;">
+                    <tbody>
                     <tr>
-                        <td width="85%"><img src="{{ url_for('static', filename='images2/logo.jpg') }}" width="50"
-                                             height="52" alt=""/> <img
-                                src="{{ url_for('static', filename='images2/西南交通大学.png') }}" width="228" height="50"
-                                alt=""/> <img src="{{ url_for('static', filename='images2/植物导览网站.png') }}" width="236"
-                                              height="35" alt=""/></td>
-                        <td width="12%">{{ form.key }}</td>
-                        <td width="3%">{{ form.submit1 }}</td>
+                        <td style="width: 85%"><img src="{{ url_for('static', filename='images2/logo.jpg') }}"
+                                                    width="50"
+                                                    height="52" alt=""/> <img
+                            src="{{ url_for('static', filename='images2/西南交通大学.png') }}" width="228" height="50"
+                            alt=""/> <img src="{{ url_for('static', filename='images2/植物导览网站.png') }}" width="236"
+                                          height="35" alt=""/></td>
+                        <td style="width: 12%">{{ form.key }}</td>
+                        <td style="width: 3%">{{ form.submit1 }}</td>
                         <script>
-                            var inputBox = document.getElementById("shuru");
+                            const inputBox = document.getElementById("shuru");
                             inputBox.addEventListener("keyup", function (event) {
                                 event.preventDefault();
-                                if (event.keyCode === 13) {
+                                if (event.key === 'Enter') {
                                     document.getElementById("but").click();
                                 }
                             });
                             window.onload = function () {
                                 document.getElementById("shuru").value = '{{ k }}';
+                                $("#shuru").css({
+                                    "border": "2px solid {{ style.input_color }}"
+                                });
+                                $("#but").css({
+                                    "background-color": "{{ style.button_color }}",
+                                    "border": "2px solid {{ style.button_border }}"
+                                });
                                 initial({{item.longitude}}, {{item.latitude}});
                                 mini_map();
                             }
                         </script>
                     </tr>
-                </form>
-                </tbody>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <table width="100%" border="0" cellspacing="5" cellpadding="0">
-                <tbody>
-                <tr>
-                    <td class="gnmz" style="background-color: {{ style.td_color }}" width="23%">
-                        <table width="100%" border="0" cellspacing="0" cellpadding="35">
-                            <tbody>
-                            <tr>
-                                <td class="button" align="center"><a href="#1F" style="color:inherit; text-decoration:none"><strong>介 绍</strong></a></td>
-                            </tr>
-                            <tr>
-                                <td class="button" align="center"><a href="#2F" style="color:inherit; text-decoration:none"><strong>花 期</strong></a></td>
-                            </tr>
-                            <tr>
-                                <td class="button" align="center"><a href="#3F" style="color:inherit; text-decoration:none"><strong>花 语</strong></a></td>
-                            </tr>
-                            <tr>
-                                <td class="button" align="center"><a href="#4F" style="color:inherit; text-decoration:none"><strong>分 布</strong></a></td>
-                            </tr>
-                            <tr>
-                                <td class="button" align="center"><a href="{{ url_for("main.index") }}" style="color:inherit; text-decoration:none"><strong>返 回</strong></a></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                    <td id="fjb" style="background-color: {{ style.td_color }}">
-                        <table width="100%" border="7" style="border-color: {{ style.td_border }};">
-                            <tbody>
-                            <tr>
-                                <th height="20%" style="font-size: 70px; color: #000000;"><strong
-                                        id="title">{{ item.name }}</strong></th>
-                            </tr>
-                            </tbody>
-                            <script>
-                                var search_box_text = document.getElementById("title").innerText;
-                                search_box_text = search_box_text.replace(/\s*/g, "");
-                                document.getElementById("search_box").value = search_box_text;
-                            </script>
-                        </table>
-                        <div class="illwx">
-                            <table width="100%" border="0" cellspacing="5">
+
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table id="whole_table">
+                    <tbody>
+                    <tr>
+                        <td class="gnmz" style="background-color: {{ style.td_color }}; width: 23%">
+                            <table class="normal_table">
                                 <tbody>
                                 <tr>
-                                    <td height="350px">
-                                        <table width="100%" border="0" cellspacing="20">
-                                            <tbody>
-                                            <tr>
-                                                <th width="45%" height="322" align="top" scope="col"><img
-                                                        src="{{ item.detail_p }}" width="100%" height="100%" alt=""/>
-                                                </th>
-                                                <th class="para" width="100%" scope="col"
-                                                    style="font-size: large;line-height: 30px; color: black;float:left;"
-                                                    align="left"><a id="1F"><strong>
-                                                    {{ item.academic }}
-                                                </strong></a></th>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </td>
+                                    <td class="button"><a href="#1F"
+                                                          style="color:inherit; text-decoration:none"><strong>介
+                                        绍</strong></a></td>
                                 </tr>
                                 <tr>
-                                    <td class="para" height="50px" style="font-size: large;line-height: 30px;">
-                                        <strong>{{ item.literary }}
-                                        </strong></td>
+                                    <td class="button"><a href="#2F"
+                                                          style="color:inherit; text-decoration:none"><strong>花
+                                        期</strong></a></td>
                                 </tr>
                                 <tr>
-                                    <td height="20%" style="font-size: 40px; color: #000000;"><a
-                                            id="2F"><strong>花 期：{{ item.time }}</strong></a></td>
+                                    <td class="button"><a href="#3F"
+                                                          style="color:inherit; text-decoration:none"><strong>花
+                                        语</strong></a></td>
                                 </tr>
                                 <tr>
-                                    <td height="20%" style="font-size: 40px; color: #000000;"><a
-                                            id="3F"><strong>花 语：{{ item.language }}</strong></a></td>
+                                    <td class="button"><a href="#4F"
+                                                          style="color:inherit; text-decoration:none"><strong>分
+                                        布</strong></a></td>
                                 </tr>
                                 <tr>
-                                    <td height="20%" style="font-size: 40px; color: #000000;"><a
-                                            id="4F"><strong>分 布</strong></a></td>
+                                    <td class="button"><a href="{{ url_for("main.index") }}"
+                                                          style="color:inherit; text-decoration:none"><strong>返
+                                        回</strong></a></td>
                                 </tr>
-                                <tr>
-                                    <td height="500px" id="container"></td>
-                                </tr>
-                                <tr>
-                                    <td height="50%" id="panel"></td>
-                                </tr>
-
                                 </tbody>
                             </table>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </td>
-    </tr>
-    </tbody>
-</table>
+                        </td>
+                        <td id="fjb" style="background-color: {{ style.td_color }}">
+                            <table style="width: 100%; ;border: 10px outset {{ style.td_border }};">
+                                <tr style="border: 0">
+                                    <th height="20%" colspan="3" style="font-size: 70px; color: #000000;">
+                                        <strong id="title">{{ item.name }}</strong>
+                                    </th>
+
+                                </tr>
+                                <tr>
+                                    <td>Bill Gates</td>
+                                    <td>555 77 854</td>
+                                    <td>555 77 855</td>
+                                </tr>
+                                <script>
+                                    let search_box_text = document.getElementById("title").innerText;
+                                    search_box_text = search_box_text.replace(/\s*/g, "");
+                                    document.getElementById("search_box").value = search_box_text;
+                                </script>
+                            </table>
+                            <div class="illwx">
+                                <table style="width: 100%; border-spacing: 5px">
+                                    <tbody>
+                                    <tr>
+                                        <td height="350px">
+                                            <table style="width: 100%; border-spacing: 20px;">
+                                                <tbody>
+                                                <tr>
+                                                    <th height="322" scope="col" style="width: 45%; margin-top: auto">
+                                                        <img
+                                                            src="{{ item.detail_p }}" width="100%" height="100%"
+                                                            alt=""/>
+                                                    </th>
+                                                    <th class="para" scope="col"
+                                                        style="width: 100%; font-size: large;line-height: 30px; color: black;float:left; text-align: left"
+                                                    ><a id="1F"><strong>
+                                                        {{ item.academic }}
+                                                    </strong></a></th>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="para" height="50px" style="font-size: large;line-height: 30px;">
+                                            <strong>{{ item.literary }}
+                                            </strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td height="20%" style="font-size: 40px; color: #000000;"><a
+                                            id="2F"><strong>花 期：{{ item.time }}</strong></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td height="20%" style="font-size: 40px; color: #000000;"><a
+                                            id="3F"><strong>花 语：{{ item.language }}</strong></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td height="20%" style="font-size: 40px; color: #000000;"><a
+                                            id="4F"><strong>分 布</strong></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td height="500px" id="container"></td>
+                                    </tr>
+                                    <tr>
+                                        <td height="50%" id="panel"></td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>
 </body>
 </html>

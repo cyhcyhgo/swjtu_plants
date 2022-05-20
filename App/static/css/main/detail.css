@@ -1,3 +1,4 @@
+@charset "utf-8";
 #web_bg {
     position: fixed;
     top: 0;
@@ -58,3 +59,38 @@
     border-bottom-right-radius: 4px;
     overflow: hidden;
 }
+
+#shuru {
+    width: 100px;
+    height: 30px;
+
+    border-radius: 5px 0 0 5px;
+    position: absolute;
+    right: 50px;
+    top: 20px;
+}
+
+#but {
+    height: 30px;
+    font-weight: bold;
+    border-radius: 0 5px 5px 0;
+    position: absolute;
+    right: 15px;
+    top: 20px;
+    cursor: pointer;
+}
+
+.normal_table {
+    width: 100%;
+    border-spacing: 0;
+}
+
+#whole_table {
+    width: 100%;
+    border-spacing: 5px;
+}
+
+#whole_table th, td {
+    padding: 0;
+}
+

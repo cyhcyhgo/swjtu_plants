@@ -14,6 +14,7 @@
     <orderEntry type="library" name="jquery" level="application" />
     <orderEntry type="library" name="demo-center" level="application" />
     <orderEntry type="library" name="demoutils" level="application" />
+    <orderEntry type="library" name="@types/jquery" level="application" />
   </component>
   <component name="PyNamespacePackagesService">
     <option name="namespacePackageFolders">
