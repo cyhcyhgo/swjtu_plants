@@ -1,0 +1,19 @@
+{% extends 'user/home/home_base.html' %}
+
+{% block right_content %}
+    {# 这里对右栏布局 #}
+{% endblock %}
+
+{% block page_button %}
+    {% if count != 0 %}
+        <div style="position: absolute;bottom: 2px; margin-left: {{ 790-(count//per_page)*13 }}px; ">{{ show_pagination(pagination, 'user.home_favorites') }}</div>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    {# 这里写js代码 #}
+    {{ super() }}
+    <script type="text/javascript">
+
+    </script>
+{% endblock %}

@@ -1,10 +1,10 @@
 from flask_login import login_user, login_required, current_user, logout_user
 
 from App.views import verificationCode
-from flask import render_template, session, Blueprint, flash
+from flask import render_template, session, Blueprint, request
 
 from App.forms import User_info, Register, Search
-from App.models import Users
+from App.models import Users, Plants, Picture
 from App.extensions import db
 
 import os
@@ -91,15 +91,23 @@ def reg():
     return render_template('user/reg.html', message=message, form=form, isJump=is_jump, isAlert=is_alert)
 
 
-@user.route('/home', methods=['GET', 'POST'])
+@user.route('/home/favorites', methods=['GET', 'POST'])
 @login_required
-def home():
+def home_favorites():
+    page = request.args.get('page', 1, type=int)
+    per_page = 10
     form = Search()
     message = ''
     is_alert = 0
     is_jump = 0
+    u = Users.query.get(current_user.id)
+    print(u.favorites.count())
+    pagination = u.favorites.order_by(Plants.id).paginate(page, per_page=per_page, error_out=False)
+    xianshi = pagination.items
     return render_template(
-        'user/home.html', message=message, isJump=is_jump, isAlert=is_alert, form=form
+        'user/home/home_favorites.html', message=message, isJump=is_jump, isAlert=is_alert, form=form,
+        count=u.favorites.count(), xianshi=xianshi, pagination=pagination,
+        Picture=Picture, page=page, per_page=per_page
     )
 
 
@@ -111,7 +119,7 @@ def logout():
     is_alert = 1
     is_jump = 1
     return render_template(
-        'user/home.html', message=message, isJump=is_jump, isAlert=is_alert, form=form
+        'user/home/home_base.html', message=message, isJump=is_jump, isAlert=is_alert, form=form
     )
 
 
@@ -121,6 +129,3 @@ def contribute():  # put application's code here
     return render_template(
         'user/contribute.html'
     )
-
-
-

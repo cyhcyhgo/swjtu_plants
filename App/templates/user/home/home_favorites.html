@@ -1,0 +1,36 @@
+{% extends 'user/home/home_base.html' %}
+
+{% block right_content %}
+    <div id="info" style="margin-left: 10px; margin-top: 5px">加载中，请稍后</div>
+    <ul>
+        {% for item in xianshi %}
+            <li onclick="window.open('{{ url_for('main.season', id=item.id) }}','_self');">
+                <p>{{ loop.index+(page-1)*per_page }}</p>
+                <img src="{{ url_for('static', filename=Picture.query.get(item.id).search_p)  }}" alt="" style="width:100%; max-height: 128px">
+                <p class="plant_family" style="font-size: 14px">{{ item.family }}</p>
+                <p class="plant_name"><strong>{{ item.plant_name }}</strong></p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+{% block page_button %}
+    {% if count != 0 %}
+        <div style="position: absolute;bottom: 2px; margin-left: {{ 790-(count//per_page)*13 }}px; ">{{ show_pagination(pagination, 'user.home_favorites') }}</div>
+    {% endif %}
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script type="text/javascript">
+        window.onload = function () {
+            information({{ count }});
+        }
+        function information(count){
+        if ( count !== 0 )
+            {document.getElementById("info").innerHTML="您已收藏"+ count +"个植物";}
+        else
+            {document.getElementById("info").innerHTML="您还未收藏任何植物。在详情页面点击“收藏”按钮后可将其添加至您的收藏夹！";}
+        }
+    </script>
+{% endblock %}

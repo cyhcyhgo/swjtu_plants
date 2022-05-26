@@ -28,7 +28,7 @@
             </div>
             <ul class="nav">
                 {% if current_user.is_authenticated %}
-                    <li onclick="window.open('{{ url_for('user.home') }}', '_self')">个人页面</li>
+                    <li onclick="window.open('{{ url_for('user.home_favorites') }}', '_self')">我的主页</li>
                 {% else %}
                     <li onclick="window.open('{{ url_for('user.login') }}', '_self')">登录</li>
                 {% endif %}

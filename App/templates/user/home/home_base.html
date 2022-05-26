@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% from 'common/marco.html' import show_pagination %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,7 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css') }}">
     <script src="{{ url_for('static', filename='js/jquery/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap/bootstrap.min.js') }}"></script>
-    <title>个人信息</title>
+    <title>我的主页</title>
 </head>
 <style>
     * {
@@ -57,10 +58,6 @@
         margin-bottom: 10px;
         margin-left: 5px;
     }
-	.logo {
-		height: 70px;
-		float: left;
-	}
     .xnjd {
         position: absolute;
         left: 75px;
@@ -75,7 +72,7 @@
     }
     .slide_bar {
         height: 575px;
-        width: 220px;
+        width: 230px;
         float: left;
         margin-left: 3%;
         background: linear-gradient(to bottom, rgba(255,255,255,.3), rgba(154, 238, 210, 0.32));
@@ -84,15 +81,15 @@
     }
     .right_info {
         height: 575px;
-        width: 1050px;
-        min-width: 1050px;
+        width: 1033px;
+        min-width: 1028px;
         float: right;
         background: linear-gradient(to bottom, rgba(255,255,255,.3), rgba(154, 238, 210, 0.32));
         margin-right: 3%;
         border: none;
         border-radius: 20px;
 		box-shadow: 10px 4px 10px #0000002f;
-		overflow-y: scroll;
+		overflow-y:hidden;
         overflow-x:hidden;
         scroll-margin-right: 100px;
     }
@@ -123,7 +120,7 @@
 	}
 	.slide_bar li:after {
 		content: ">";
-		margin-left: 90px;
+		margin-left: 120px;
 		color: white;
 	}
 	.right_info ul {
@@ -135,8 +132,8 @@
 		width: 195px;
 		background-color: rgba(5, 199, 155, 0.25);
 		float: left;
-		margin-right: 10px;
-		margin-bottom: 10px;
+		margin: 5px;
+        cursor: pointer;
 		border-radius: 10px;
 	}
 	.right_info li:nth-child(5n) {
@@ -147,6 +144,7 @@
 		font-size: 18px;
 		text-align: center;
 		line-height: 30px;
+        margin: 0;
 	}
     .sou {
         display: inline;
@@ -164,7 +162,6 @@
         right: 50px;
         top: 20px;
     }
-
     #but {
         background-color: rgba(98, 190, 156, 0.7);
         border: 2px solid rgba(190, 224, 208, 0.8);
@@ -214,7 +211,6 @@
             {{ form.key }}
             {{ form.submit1 }}
         </form>
-
         <script>
             window.onload = function () {
                 if ({{ isAlert }}) {
@@ -241,6 +237,9 @@
 			    }
 			});
         </script>
+        {% block scripts %}
+
+        {% endblock %}
     </div>
     <div class="mainland">
     <div class="slide_bar">
@@ -252,16 +251,16 @@
 			<li><a href="#">个人信息</a></li>
             <li onclick="confirmDelete()">退出登录</li>
 		</ul>
-		</div>
+    </div>
     <div class="right_info">
-        <div id="info" style="margin-left: 10px; margin-top: 5px">加载中，请稍后</div>
-		<ul>
-            {% for item in xianshi %}
-			    <li><p>{{ item.serial }}</p><img src="{{ item.image }}" alt="" style="width:100%; ">
-			    <p class="plant_name"><strong>{{ item.name }}</strong></p></li>
-			{% endfor %}
-			
-		</ul></div>
+        {% block right_content %}
+            默认内容
+        {% endblock %}
+    </div>
+    <!-- 切换页面的按钮 -->
+    {% block page_button %}
+
+    {% endblock %}
     </div>
 </div>
 </body>

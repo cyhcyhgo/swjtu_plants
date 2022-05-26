@@ -53,7 +53,7 @@
 	<div id="search_ts">加载中，请稍后</div>
 	<div id="xianshi">
         {% for item in xianshi %}
-            <div class="content" >
+            <div class="content">
 		        <div class="left"><img src="{{item.image}}" alt="" width="160px" height="auto"></div>
 		        <div class="middle"><p class="search_text"><strong>种名：</strong>{{ item.name }}</p><p class="search_text"><strong>科名：</strong>{{ item.family }}</p> <p class="search_text"><strong>主要分布区域:</strong></p><p class="search_text">{{ item.area }}</p>
 		        <a href="{{ item.href }}" class="search_text more"><strong>查看更多--></strong></a></div>
