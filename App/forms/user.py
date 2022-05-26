@@ -13,16 +13,6 @@ class User_info(FlaskForm):
     submit = SubmitField('登录', render_kw={"id": "but"})
 
 
-class Manage_user_info(FlaskForm):
-    user_id = StringField('', validators=[DataRequired()], render_kw={"type": "text", })
-    name = StringField('', validators=[DataRequired()],
-                       render_kw={"type": "text", "placeholder": "用户名", 'maxlength': '20'})
-    password = PasswordField('', validators=[DataRequired()],
-                             render_kw={"placeholder": "密码", 'maxlength': '10', 'minlength': '6'})
-    isAdministrator = BooleanField('', render_kw={"id": "check"})
-    submit = SubmitField('登录', render_kw={"id": "but"})
-
-
 class Register(FlaskForm):
     username = StringField('', validators=[DataRequired()],
                            render_kw={'type': 'text', 'class': 'input_wide', 'placeholder': '用户名', 'maxlength': '20'})

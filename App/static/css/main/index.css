@@ -7,7 +7,7 @@ body {
 
 .whole {
     position: absolute;
-    width: 1280px;
+    width: 100%;
     height: auto;
     margin: 0 50px;
 }

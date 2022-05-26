@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>西南交通大学植物导览网站</title>
-    <link rel="SHORTCUT ICON" href="{{ url_for('static', filename='images2/logo2.jpg') }}">
+    <link rel="SHORTCUT ICON" href="{{ url_for('static', filename='images2/logo2.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main/index.css') }}" type="text/css">
 </head>
 <style>
@@ -28,7 +28,7 @@
             </div>
             <ul class="nav">
                 {% if current_user.is_authenticated %}
-                    <li >个人页面</li>
+                    <li onclick="window.open('{{ url_for('user.home') }}', '_self')">个人页面</li>
                 {% else %}
                     <li onclick="window.open('{{ url_for('user.login') }}', '_self')">登录</li>
                 {% endif %}

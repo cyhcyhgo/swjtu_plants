@@ -14,8 +14,6 @@ class Plants(db.Model):
     info = db.relationship('Info', backref='plants', uselist=False)
     position = db.relationship('Position', backref='plants', uselist=False)
     picture = db.relationship('Picture', backref='plants', uselist=False)
-    # 添加关联外键'表名.字段'
-    uid = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __repr__(self):
         return '<Plants %r>' % self.plant_name

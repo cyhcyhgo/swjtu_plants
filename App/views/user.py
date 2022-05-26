@@ -1,9 +1,9 @@
-from flask_login import login_user, login_required, current_user
+from flask_login import login_user, login_required, current_user, logout_user
 
 from App.views import verificationCode
-from flask import render_template, session, Blueprint
+from flask import render_template, session, Blueprint, flash
 
-from App.forms import User_info, Register
+from App.forms import User_info, Register, Search
 from App.models import Users
 from App.extensions import db
 
@@ -40,6 +40,7 @@ def login():
                     message = '欢迎回来，' + user_from_db.username
                     session.permanent = True  # 默认为 31 天
                     login_user(user_from_db, remember=form.remember.data)
+                    session['user_name'] = username
                     is_alert = 1
                     is_jump = 1
             else:
@@ -90,10 +91,36 @@ def reg():
     return render_template('user/reg.html', message=message, form=form, isJump=is_jump, isAlert=is_alert)
 
 
+@user.route('/home', methods=['GET', 'POST'])
+@login_required
+def home():
+    form = Search()
+    message = ''
+    is_alert = 0
+    is_jump = 0
+    return render_template(
+        'user/home.html', message=message, isJump=is_jump, isAlert=is_alert, form=form
+    )
+
+
+@user.route('/logout', methods=['GET', 'POST'])
+def logout():
+    logout_user()
+    form = Search()
+    message = '您已退出登录'
+    is_alert = 1
+    is_jump = 1
+    return render_template(
+        'user/home.html', message=message, isJump=is_jump, isAlert=is_alert, form=form
+    )
+
+
 @user.route('/contribute', methods=('GET', 'POST'))
 @login_required
 def contribute():  # put application's code here
     return render_template(
         'user/contribute.html'
     )
+
+
 

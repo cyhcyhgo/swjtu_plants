@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="SHORTCUT ICON" href="{{ url_for('static', filename='images2/logo2.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap/bootstrap.min.js') }}"></script>
+    <title>个人信息</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    html, body{
+        height: 100%;
+        min-width: 1280px;
+    }
+	a {
+		text-decoration: none;
+	}
+	ul {
+		list-style: none;
+	}
+    body {
+        width: 100%;
+    }
+    #web_bg{
+	   position:fixed;
+	   top: 0;
+	   left: 0;
+	   width:100%;
+	   height:100%;
+	   z-index:-10;
+	   zoom: 1;
+	   background-color: #fff;
+	   background-repeat: no-repeat;
+	   background-size: cover;
+	   -webkit-background-size: cover;
+	   -o-background-size: cover;
+	   background-position: center 0;
+    }
+    .user_info {
+        height: 670px;
+        min-width: 1380px;
+    }
+    .w {
+        width: 100%;
+        min-width: 1380px;
+        height: 100%;
+        margin: 0 auto;
+    }
+    .navbar {
+        height: 70px;
+        background-color: rgba(255, 255, 255, 0);
+        margin-bottom: 10px;
+        margin-left: 5px;
+    }
+	.logo {
+		height: 70px;
+		float: left;
+	}
+    .xnjd {
+        position: absolute;
+        left: 75px;
+        display: inline-block;
+    }
+
+    .web {
+        position: absolute;
+        top: 35px;
+        left: 90px;
+        display: inline-block;
+    }
+    .slide_bar {
+        height: 575px;
+        width: 220px;
+        float: left;
+        margin-left: 3%;
+        background: linear-gradient(to bottom, rgba(255,255,255,.3), rgba(154, 238, 210, 0.32));
+        box-shadow: 10px 4px 10px #0000002f;
+        border-radius: 15px;
+    }
+    .right_info {
+        height: 575px;
+        width: 1050px;
+        min-width: 1050px;
+        float: right;
+        background: linear-gradient(to bottom, rgba(255,255,255,.3), rgba(154, 238, 210, 0.32));
+        margin-right: 3%;
+        border: none;
+        border-radius: 20px;
+		box-shadow: 10px 4px 10px #0000002f;
+		overflow-y: scroll;
+        overflow-x:hidden;
+        scroll-margin-right: 100px;
+    }
+	.photo {
+		height: 150px;
+		background: #00000000;
+		border-radius: 15px 15px 0 0;
+		margin-bottom: 10px;
+	}
+	.slide_bar li {
+		height: 40px;
+		background-color: rgba(190, 224, 208, 0.8);
+		font-size: 16px;
+        font-family: microsoft Yahei, serif;
+		text-align: left;
+		line-height: 40px;
+		padding-left: 10px;
+		cursor: pointer;
+	}
+	.slide_bar li:first-child {
+		background-color: rgba(98, 190, 156, 0.7);
+	}
+	.slide_bar li a {
+		color: white;
+	}
+	.slide_bar li:hover {
+		background: rgba(0,0,0,.2);
+	}
+	.slide_bar li:after {
+		content: ">";
+		margin-left: 90px;
+		color: white;
+	}
+	.right_info ul {
+		margin-top: 5px;
+		margin-left: 5px;
+	}
+	.right_info li {
+		height: 230px;
+		width: 195px;
+		background-color: rgba(5, 199, 155, 0.25);
+		float: left;
+		margin-right: 10px;
+		margin-bottom: 10px;
+		border-radius: 10px;
+	}
+	.right_info li:nth-child(5n) {
+		margin-right: 0;
+	}
+	.right_info li p {
+		height: 30px;
+		font-size: 18px;
+		text-align: center;
+		line-height: 30px;
+	}
+    .sou {
+        display: inline;
+        position: absolute;
+        right: 10px;
+        width: 150px;
+        height: 70px;
+    }
+    #shuru {
+        width: 100px;
+        height: 30px;
+        border: 2px solid rgba(168, 205, 52, 0.8);
+        border-radius: 5px 0 0 5px;
+        position: absolute;
+        right: 50px;
+        top: 20px;
+    }
+
+    #but {
+        background-color: rgba(98, 190, 156, 0.7);
+        border: 2px solid rgba(190, 224, 208, 0.8);
+        height: 30px;
+        font-weight: bold;
+        border-radius: 0 5px 5px 0;
+        position: absolute;
+        right: 18px;
+        top: 20px;
+        cursor: pointer;
+    }
+
+    #but:hover {
+        background-color: #5fa454df;
+    }
+
+    .back {
+        position: absolute;
+        width: 100px;
+        height: 50px;
+        top: 10px;
+        right: 240px;
+        background-size: 100px 50px;
+        background-repeat: no-repeat;
+        text-align: center;
+        line-height: 50px;
+        cursor: pointer;
+    }
+
+    .back:hover {
+        text-decoration-color: white;
+    }
+</style>
+<body>
+<div class="wrapper">
+    <div id="web_bg" style="background-image: url({{ url_for('static', filename='images2/background2.png') }});">
+		</div>
+ </div>
+<div class="user_info w">
+    <div class="navbar">
+        <img src="{{ url_for('static', filename='images1/logo.png') }}" height="70px" alt="">
+        <img src="{{ url_for('static', filename='images2/西南交通大学.png') }}" height="40" width="auto" class="xnjd" alt="">
+        <img src="{{ url_for('static', filename='images1/植物导览网站.png') }}" height="30" width="auto" class="web" alt="">
+		<div class="back" onclick="goBack()" style="background-image: url({{ url_for('static', filename='image_search/button3.png') }});">返回首页</div>
+        <form class="sou" method="post" action="{{ url_for('main.t1') }}">
+            {{ form.hidden_tag() }}
+            {{ form.key }}
+            {{ form.submit1 }}
+        </form>
+
+        <script>
+            window.onload = function () {
+                if ({{ isAlert }}) {
+                    alert("{{ message }}");
+                }
+                if ({{ isJump }}) {
+                    window.open("{{ url_for("user.login")}}", "_self");
+                }
+            }
+            function confirmDelete() {
+                const w = confirm("确认要退出登录吗？");
+                if (w===true){
+                    window.open('{{ url_for('user.logout') }}', '_self');
+                }
+            }
+            function goBack(){
+                window.open("{{ url_for("main.index")}}","_self");
+            }
+            const inputBox = document.getElementById("shuru");
+                inputBox.addEventListener("keyup", function(event) {
+				    event.preventDefault();
+				    if (event.key === 'Enter') {
+				    document.getElementById("but").click();
+			    }
+			});
+        </script>
+    </div>
+    <div class="mainland">
+    <div class="slide_bar">
+		<div class="photo" style="text-align: center"><img src="{{ url_for('static',filename='images1/校徽1.png') }}" alt="" style="height:50%; margin-top: 5%">
+		<p style="text-align: center; margin-top:10px;">{{ session['user_name'] }}</p></div>
+		<ul>
+			<li><a href="#">我的收藏</a></li>
+			<li><a href="#">我的投稿</a></li>
+			<li><a href="#">个人信息</a></li>
+            <li onclick="confirmDelete()">退出登录</li>
+		</ul>
+		</div>
+    <div class="right_info">
+        <div id="info" style="margin-left: 10px; margin-top: 5px">加载中，请稍后</div>
+		<ul>
+            {% for item in xianshi %}
+			    <li><p>{{ item.serial }}</p><img src="{{ item.image }}" alt="" style="width:100%; ">
+			    <p class="plant_name"><strong>{{ item.name }}</strong></p></li>
+			{% endfor %}
+			
+		</ul></div>
+    </div>
+</div>
+</body>
+</html>

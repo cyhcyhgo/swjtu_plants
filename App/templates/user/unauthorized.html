@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="SHORTCUT ICON" href="{{ url_for('static', filename='images2/logo2.png') }}">
+    <title>请先登录</title>
+</head>
+<body>
+<script>
+    window.onload = function (){
+        alert("{{ login_manager.login_message }}");
+        window.open("{{ url_for( login_manager.login_view )}}", "_self");
+    }
+</script>
+</body>
+</html>

@@ -13,7 +13,8 @@ cf.read(basedir + r'\config.ini', encoding='utf-8')
 
 
 @main.route('/', methods=('GET', 'POST'))
-def index():  # 首页
+def index():
+    """首页"""
     is_first_load = cf.getboolean("mysql", "is_first_load")
     if is_first_load:
         initial_database(db)
@@ -25,14 +26,15 @@ def index():  # 首页
         print("!")
     form = Search()
     form2 = Fenlei()
-    print(current_user.is_authenticated)
+    print('用户已登录' if current_user.is_authenticated else '用户未登录')
     return render_template(
         'main/index.html', form=form, form2=form2
     )
 
 
 @main.route('/search_2/<keyword>')
-def search_2(keyword):  # 搜索界面
+def search_2(keyword):
+    """搜索界面"""
     form = Search()
     k = ''
     xianshi_t = []
@@ -77,6 +79,7 @@ def search_2(keyword):  # 搜索界面
 
 @main.route('/fenlei/<keyword>')
 def fenlei(keyword):
+    """分类页面"""
     form = Search()
     form2 = Fenlei()
     # k代表序号
@@ -173,5 +176,6 @@ def season(id):
         item=dic,
         form=form,
         k=name_2,
-        style=Style(tup)
+        style=Style(tup),
+        plant_id=id,
     )

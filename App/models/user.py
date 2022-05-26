@@ -1,10 +1,17 @@
+from sqlalchemy import Table
+
 from App.extensions import db, login_manager
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer, BadSignature, SignatureExpired
-from flask import current_app, jsonify
-
+from flask import current_app, jsonify, render_template
 from App.models.plant import Plants
+
+# 联系表
+Favorites = Table("favorites", db.metadata,
+                  db.Column("id", db.Integer, primary_key=True),
+                  db.Column('user_id', db.Integer, db.ForeignKey("users.id")),
+                  db.Column('plant_id', db.Integer, db.ForeignKey("plants.id")))
 
 
 class Users(UserMixin, db.Model):
@@ -15,7 +22,7 @@ class Users(UserMixin, db.Model):
     password_hash = db.Column(db.String(128), nullable=False)
     isAdministrator = db.Column(db.Integer, nullable=False)
     confirmed = db.Column(db.Boolean, default=True)
-    Plants = db.relationship('Plants', backref='users', lazy='dynamic')
+    favorites = db.relationship('Plants', backref='users', lazy='dynamic', secondary='favorites')
 
     @property
     def password(self):
@@ -60,20 +67,20 @@ class Users(UserMixin, db.Model):
         """判断是否收藏指定植物"""
         # 获取该用户所有收藏的植物列表
         favorites = self.favorites.all()
-        plants = list(filter(lambda p: p.id == pid, favorites))
-        if len(plants) > 0:
-            return True
+        for plants in favorites:
+            if int(plants.id) == int(pid):
+                return True
         return False
 
     def add_favorite(self, pid) -> None:
         """收藏指定植物"""
         p = Plants.query.get(pid)
-        self.favorite.append(p)
+        self.favorites.append(p)
 
     def del_favorite(self, pid) -> None:
         """取消收藏指定植物"""
         p = Plants.query.get(pid)
-        self.favorite.remove(p)
+        self.favorites.remove(p)
 
     def __repr__(self):
         return '<User %s>' % self.username
@@ -90,3 +97,10 @@ class Users(UserMixin, db.Model):
 def load_user(uid):
     """登录认证的回调"""
     return Users.query.get(int(uid))
+
+
+@login_manager.unauthorized_handler
+def unauthorized():
+    """未登录时显示提示信息"""
+    login_manager.login_message = '您需要登录后才能使用此功能！'
+    return render_template('user/unauthorized.html', login_manager=login_manager)

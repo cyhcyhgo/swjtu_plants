@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8">
     <title>后台管理</title>
-    <link rel="SHORTCUT ICON" href="{{ url_for('static', filename='images2/logo2.jpg') }}">
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="SHORTCUT ICON" href="{{ url_for('static', filename='images2/logo2.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css') }}">
+    <script src="{{ url_for('static', filename='js/jquery/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap/bootstrap.min.js') }}"></script>
     <style>
         * {
             padding: 0;
@@ -156,7 +156,7 @@
                     <p>是否为管理员：{{ form.isAdministrator(id='isAdministrator') }}</p>
                 </div>
                 <div class="modal-footer">
-                    <button  type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                     <button type="button" class="btn btn-primary" onclick="onSubmit('/manager/edit')">提交</button>
                 </div>
             </form>

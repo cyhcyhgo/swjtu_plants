@@ -1,13 +1,25 @@
 from flask import render_template, request, session, jsonify, Blueprint
+from flask_login import login_required
 
-from App.extensions import db
+from App.extensions import db, login_manager
 from App.forms import Manage_user_info
 from App.models import Plants, Info, Position, Picture, Users
 
 manager = Blueprint('manager', __name__)
 
 
+def manager_only(user_id) -> bool:
+    """阻止非管理员访问管理页面"""
+    if user_id is None:
+        return True
+    user_from_db = Users.query.filter(Users.id == user_id).first()
+    if int(user_from_db.isAdministrator) == 0:
+        return True
+    return False
+
+
 @manager.route('/plants_manage', methods=('GET', 'POST'))
+@login_required
 def plants_manage():  # put application's code here
     """植物管理页面"""
     xianshi_t = []
@@ -32,8 +44,12 @@ def plants_manage():  # put application's code here
 
 
 @manager.route('/user_manage', methods=('GET', 'POST'))
+@login_required
 def user_manage():
     """用户信息管理"""
+    if manager_only(session['_user_id']):
+        login_manager.login_message = '此页面仅管理员可访问！'
+        return render_template('user/unauthorized.html', login_manager=login_manager)
     form = Manage_user_info()
     xianshi_t = []
     count = 1
@@ -52,6 +68,7 @@ def user_manage():
 
 
 @manager.route('/edit', methods=('GET', 'POST'))
+@login_required
 def edit():
     """修改用户信息"""
     user_id = request.args.get('user_id')
@@ -59,7 +76,7 @@ def edit():
     password = request.args.get('password')
     is_administrator = request.args.get('isAdministrator')
     current_user = Users.query.filter(Users.username.ilike(user_name)).first()
-    if is_administrator is None and str(session['user_id']) == str(user_id):
+    if is_administrator is None and str(session['_user_id']) == str(user_id):
         return jsonify({'status': True, 'message': '不能撤销自己的管理员权限', 'isJump': False})
     elif current_user and str(user_id) != str(current_user.id):
         # 用户名不区分大小写
@@ -75,6 +92,7 @@ def edit():
 
 
 @manager.route('/delete', methods=('GET', 'POST'))
+@login_required
 def delete():
     """删除用户"""
     user_id = request.args.get('user_id')

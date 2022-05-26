@@ -1,5 +1,6 @@
 from .main import Search, Fenlei, Style
-from .user import User_info, Register, Manage_user_info
+from .user import User_info, Register
+from .manager import Manage_user_info
 
 # 不同季节的样式
 spring_style = ('button1.png', 'rgba(226, 70, 232, 0.57)', 'rgba(213, 151, 217, 0.57)', 'rgba(213, 107, 224, 0.88)',

@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
     <title>植物概览</title>
-    <link rel="SHORTCUT ICON" href="{{ url_for('static', filename='images2/logo2.jpg') }}">
-    <script src="{{ url_for('static', filename='files/jquery-3.6.0.min.js') }}"></script>
+    <link rel="SHORTCUT ICON" href="{{ url_for('static', filename='images2/logo2.png') }}">
+    <script src="{{ url_for('static', filename='js/jquery/jquery-3.6.0.min.js') }}"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main/detail.css') }}" type="text/css">
     <style>
         .button {
@@ -41,7 +41,7 @@
                 <table style="width: 100%; height: 50px; border-spacing: 0;">
                     <tbody>
                     <tr>
-                        <td style="width: 85%"><img src="{{ url_for('static', filename='images2/logo.jpg') }}"
+                        <td style="width: 85%"><img src="{{ url_for('static', filename='images1/logo.png') }}"
                                                     width="50"
                                                     height="52" alt=""/> <img
                             src="{{ url_for('static', filename='images2/西南交通大学.png') }}" width="228" height="50"
@@ -58,6 +58,7 @@
                                 }
                             });
                             window.onload = function () {
+                                // 渲染网页元素，包括搜索框，背景，边框
                                 document.getElementById("shuru").value = '{{ k }}';
                                 $("#shuru").css({
                                     "border": "2px solid {{ style.input_color }}"
@@ -66,6 +67,7 @@
                                     "background-color": "{{ style.button_color }}",
                                     "border": "2px solid {{ style.button_border }}"
                                 });
+                                // 初始化地图
                                 initial({{item.longitude}}, {{item.latitude}});
                                 mini_map();
                             }
@@ -118,17 +120,59 @@
                                     <th height="20%" colspan="3" style="font-size: 70px; color: #000000;">
                                         <strong id="title">{{ item.name }}</strong>
                                     </th>
-
                                 </tr>
                                 <tr>
-                                    <td>Bill Gates</td>
-                                    <td>555 77 854</td>
-                                    <td>555 77 855</td>
+                                    <td style="background-color: #0C7721"></td>
+                                    <td style="text-align: center; font-size: 18px">
+                                        <div style="cursor: pointer; user-select: none; display: flex; justify-content: center" id="collect">
+                                            {% if current_user.is_authenticated %}
+                                                <form id='on_favorite' method="post" action="{{ url_for('posts.collect', pid=plant_id) }}">
+                                                    {% if current_user.is_favorite(plant_id) %}
+                                                    <img id="star_full" src="{{ url_for('static', filename='images2/source/Star_full.png') }}" style="width: 26px; height: 26px" alt="">
+                                                        <img id="star_empty" src="{{ url_for('static', filename='images2/source/Star_empty.png') }}" style="display: none; width: 26px; height: 26px" alt="">
+                                                        <div id="is_favorite" onclick="changeStyle(this, '{{ url_for('posts.collect', pid=plant_id) }}')">已收藏</div>
+                                                    {% else %}
+                                                        <img id="star_empty" src="{{ url_for('static', filename='images2/source/Star_empty.png') }}" style="width: 26px; height: 26px" alt="">
+                                                        <img id="star_full" src="{{ url_for('static', filename='images2/source/Star_full.png') }}" style="display: none; width: 26px; height: 26px" alt="">
+                                                        <div id="is_favorite" onclick="changeStyle(this, '{{ url_for('posts.collect', pid=plant_id) }}')">收藏</div>
+                                                    {% endif %}
+                                                </form>
+                                            {% else %}
+                                                <img id="star_empty" src="{{ url_for('static', filename='images2/source/Star_empty.png') }}" style="width: 26px; height: 26px" alt="">
+                                                <div id="is_favorite" onclick="alert('登录后即可使用收藏功能！')">收藏</div>
+                                            {% endif %}
+                                        </div>
+                                    </td>
+                                    <td style="background-color: #fcfd49"></td>
                                 </tr>
                                 <script>
                                     let search_box_text = document.getElementById("title").innerText;
                                     search_box_text = search_box_text.replace(/\s*/g, "");
                                     document.getElementById("search_box").value = search_box_text;
+                                    function changeStyle(obj, route){
+                                        if (obj.innerText.replace(/\s*/g, "")==='收藏'){
+                                            obj.innerText='已收藏';
+                                            document.getElementById('star_full').style.display = 'unset';
+                                            document.getElementById('star_empty').style.display = 'none';
+                                        }
+                                        else{
+                                            obj.innerText='收藏';
+                                            document.getElementById('star_full').style.display = 'none';
+                                            document.getElementById('star_empty').style.display = 'unset';
+                                        }
+                                        $.ajax({
+                                            type: 'GET',
+                                            url: route,
+                                            dataType: 'json',
+                                            data: $('#on_favorite').serialize(),
+                                            success: function(){
+                                                //alert('成功');
+                                            },
+                                            error: function(){
+                                                alert('网络异常');
+                                            }
+                                        });
+                                    }
                                 </script>
                             </table>
                             <div class="illwx">

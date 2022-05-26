@@ -2,11 +2,13 @@
 from .main import main
 from .user import user
 from .manager import manager
+from .posts import posts
 
 DEFAULT_BLUEPRINT = (
     (main, ''),
     (user, '/user'),
     (manager, '/manager'),
+    (posts, '/posts'),
 )
 
 
