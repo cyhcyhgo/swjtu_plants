@@ -3,7 +3,7 @@ from datetime import timedelta
 import configparser
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-
+print(basedir)
 
 class Config:
     """载入配置数据"""
@@ -22,7 +22,7 @@ class Config:
     def __init__(self):
         """从config.ini中读取配置项"""
         cf = configparser.ConfigParser()
-        cf.read(basedir + r'\config.ini', encoding='utf-8')
+        cf.read(basedir + r'/config.ini', encoding='utf-8')
         mysql_host = cf.get("mysql", "host")
         mysql_port = cf.get("mysql", "port")
         mysql_db_name = cf.get("mysql", "db_name")

@@ -2,6 +2,9 @@
 
 {% block right_content %}
     {# 这里对右栏布局 #}
+    <div id="info" style="margin-left: 10px; margin-top: 5px">加载中，请稍后</div>
+    {# TODO: 完成投稿页面的布局 #}
+
 {% endblock %}
 
 {% block page_button %}
@@ -14,6 +17,14 @@
     {# 这里写js代码 #}
     {{ super() }}
     <script type="text/javascript">
-
+        window.onload = function () {
+            information({{ count }});
+        }
+        function information(count){
+        if ( count !== 0 )
+            {document.getElementById("info").innerHTML="您有"+ count +"篇投稿";}
+        else
+            {document.getElementById("info").innerHTML="您还没有任何投稿。点击首页底部的“向我投稿”，将您发现的新植物告诉我们！";}
+        }
     </script>
 {% endblock %}

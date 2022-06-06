@@ -1,13 +1,13 @@
 @charset "utf-8";
 body {
     position: absolute;
-    width: 100%;
+    width: 99%;
     height: 2320px;
 }
 
 .whole {
     position: absolute;
-    width: 100%;
+    width: 1280px;
     height: auto;
     margin: 0 50px;
 }
@@ -464,12 +464,12 @@ body {
 }
 
 .footer {
-    width: 100%;
+    width: 1370px;
     height: 150px;
     background-color: #B1F5F7;
     margin: 5px 0 0 0;
     position: absolute;
-    bottom: 0;
+    bottom: -300px;
 }
 
 .footer-left {
@@ -486,6 +486,22 @@ body {
     right: 10px;
 
 }
+/* 图表 */
+.charts_box {
+    position: absolute;
+    top:2150px;
+    width: 1240px;
+    height: 350px;
+    padding-left: 70px;
+}
+.charts {
+    transition: all 0.5s;
+}
+.charts:hover {
+    transform: translateY(-10px);
+    box-shadow: #a9a9a9 8px 8px 8px;
+}
+/* 图表结束 */
 
 #footer-table {
     border:solid #000000; border-width:1px 0 0 1px;

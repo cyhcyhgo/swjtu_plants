@@ -9,7 +9,7 @@ from flask_login import current_user
 main = Blueprint('main', __name__)
 basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 cf = configparser.ConfigParser()
-cf.read(basedir + r'\config.ini', encoding='utf-8')
+cf.read(basedir + r'/config.ini', encoding='utf-8')
 
 
 @main.route('/', methods=('GET', 'POST'))
@@ -19,7 +19,7 @@ def index():
     if is_first_load:
         initial_database(db)
         cf.set("mysql", "is_first_load", "False")
-        f = open(basedir + r'\config.ini', 'w')
+        f = open(basedir + r'/config.ini', 'w')
         cf.write(f)
         f.close()
         del f

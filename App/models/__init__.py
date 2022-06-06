@@ -13,7 +13,7 @@ def initial_database(database):
             database.session.delete(member)
 
     # 读取Excel
-    d = op.load_workbook(os.path.abspath(os.path.dirname(os.path.dirname(__file__))) + r'\static\intro.xlsx')
+    d = op.load_workbook(os.path.abspath(os.path.dirname(os.path.dirname(__file__))) + r'/static/intro.xlsx')
     table = d['Sheet1']
     del d
 
@@ -40,8 +40,8 @@ def initial_database(database):
         i = i + 1
     # for member in Users.query.all():
     #     database.session.delete(member)
-    # p5 = Users(id=1, username='CYH', password='123456', isAdministrator=1, confirmed=True)
-    # p6 = Users(id=2, username='GX', password='654321', isAdministrator=0, confirmed=True)
+    # p5 = Users(username='CYH', password='123456', isAdministrator=1, confirmed=True)
+    # p6 = Users(username='GX', password='654321', isAdministrator=0, confirmed=True)
     # database.session.add(p5)
     # database.session.add(p6)
     database.session.commit()

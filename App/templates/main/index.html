@@ -1,10 +1,11 @@
-<!doctype html>
-<html lang="zh_CN">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
     <meta charset="utf-8">
     <title>西南交通大学植物导览网站</title>
     <link rel="SHORTCUT ICON" href="{{ url_for('static', filename='images2/logo2.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main/index.css') }}" type="text/css">
+    <script src="{{ url_for('static', filename='js/main/echarts.js') }}"></script>
 </head>
 <style>
 
@@ -13,14 +14,18 @@
 <div class="whole">
     <div class="dh">
         <div id="index_image">
-             <img src="{{ url_for('static', filename='images1/logo.png') }}" width="auto" height="70" class="logo" alt="">
-        <img src="{{ url_for('static', filename='images2/西南交通大学.png') }}" height="40" width="auto" class="xnjd" alt="">
-        <img src="{{ url_for('static', filename='images1/植物导览网站.png') }}" height="30" width="auto" class="web" alt="">
+            <img src="{{ url_for('static', filename='images1/logo.png') }}" width="auto" height="70" class="logo"
+                 alt="">
+            <img src="{{ url_for('static', filename='images2/西南交通大学.png') }}" height="40" width="auto" class="xnjd"
+                 alt="">
+            <img src="{{ url_for('static', filename='images1/植物导览网站.png') }}" height="30" width="auto" class="web"
+                 alt="">
 
         </div>
-        <iframe id="weather" width="300" height="30" allowtransparency="true" src="https://i.tianqi.com?c=code&id=34&icon=1&py=pixian&site=12"></iframe>
+        <iframe id="weather" width="300" height="30" allowtransparency="true"
+                src="https://i.tianqi.com?c=code&id=34&icon=1&py=pixian&site=12"></iframe>
 
-       <form class="nav" method="post" action="{{ url_for('main.t2') }}">
+        <form class="nav" method="post" action="{{ url_for('main.t2') }}">
             <div style="display: none">
                 {{ form2.hidden_tag() }}
                 {{ form2.key }}
@@ -67,7 +72,7 @@
                 </li>
                 <script>
                     function capture(data) {
-                        document.getElementById("mystery_m").value=data.innerText;
+                        document.getElementById("mystery_m").value = data.innerText;
                         document.getElementById("mystery_b").click();
                     }
                 </script>
@@ -78,7 +83,7 @@
             {{ form.key }}
             {{ form.submit1 }}
             <script>
-                document.getElementById("shuru").value='银杏';
+                document.getElementById("shuru").value = '银杏';
                 let inputBox = document.getElementById("shuru");
                 inputBox.addEventListener("keyup", function (event) {
                     event.preventDefault();
@@ -154,38 +159,162 @@
         <img src="{{ url_for('static', filename='images1/地图.png') }}" alt="" width="1280px" class="map_image"/>
         <div class="dbfk1"><img src="{{ url_for('static', filename='images1/地标.png') }}" width="30px" alt=""
                                 class="db"/>
-            <div class="wenben"><a href="{{ url_for("main.season",id=11)}}"><img src="{{ url_for('static', filename='images1/玉兰方框.png') }}"
-                                                          alt="" width="100%"/></a>
+            <div class="wenben"><a href="{{ url_for("main.season",id=11) }}"><img
+                src="{{ url_for('static', filename='images1/玉兰方框.png') }}"
+                alt="" width="100%"/></a>
             </div>
         </div>
         <div class="dbfk2"><img src="{{ url_for('static', filename='images1/地标.png') }}" width="30px" alt=""
                                 class="db"/>
-            <div class="wenben"><a href="{{ url_for("main.season",id=6)}}"><img src="{{ url_for('static', filename='images1/桂花方框.png') }}"
-                                                           alt="" width="100%"/></a>
+            <div class="wenben"><a href="{{ url_for("main.season",id=6) }}"><img
+                src="{{ url_for('static', filename='images1/桂花方框.png') }}"
+                alt="" width="100%"/></a>
             </div>
         </div>
         <div class="dbfk3"><img src="{{ url_for('static', filename='images1/地标.png') }}" width="30px" alt=""
                                 class="db"/>
-            <div class="wenben"><a href="{{ url_for("main.season",id=18)}}"><img src="{{ url_for('static', filename='images1/荷花方框.png') }}"
-                                                          alt="" width="100%"/></a>
+            <div class="wenben"><a href="{{ url_for("main.season",id=18) }}"><img
+                src="{{ url_for('static', filename='images1/荷花方框.png') }}"
+                alt="" width="100%"/></a>
             </div>
         </div>
         <div class="dbfk4"><img src="{{ url_for('static', filename='images1/地标.png') }}" width="30px" alt=""
                                 class="db"/>
-            <div class="wenben"><a href="{{ url_for("main.season",id=8)}}"><img src="{{ url_for('static', filename='images1/垂柳方框.png') }}"
-                                                            alt="" width="100%"/></a>
+            <div class="wenben"><a href="{{ url_for("main.season",id=8) }}"><img
+                src="{{ url_for('static', filename='images1/垂柳方框.png') }}"
+                alt="" width="100%"/></a>
             </div>
         </div>
         <div class="dbfk5"><img src="{{ url_for('static', filename='images1/地标.png') }}" width="30px" alt=""
                                 class="db"/>
-            <div class="wenben"><a href="{{ url_for("main.season",id=3)}}"><img src="{{ url_for('static', filename='images1/石楠方框.png') }}"
-                                                           alt="" width="100%"/></a>
+            <div class="wenben"><a href="{{ url_for("main.season",id=3) }}"><img
+                src="{{ url_for('static', filename='images1/石楠方框.png') }}"
+                alt="" width="100%"/></a>
             </div>
         </div>
 
     </div>
     <img src="{{ url_for('static', filename='images1/banner.png') }}" width="100%" height="auto" alt="">
 </div>
+
+{#图表部分开始#}
+<div class="charts_box">
+    <div class="charts" id="charts1"
+         style="margin-right:10px;width: 300px;height:260px;border-radius: 5px; background-image:linear-gradient(180deg, #bbbcde, #aaa1ce, #8591c8);margin-top: 30px;float: left;"></div>
+    <div class="charts" id="charts2"
+         style="margin-right:10px;width: 300px;height:260px;border-radius: 5px; background-image:linear-gradient(0deg, #f4abac, #f6eaec);margin-top: 30px;float: left;"></div>
+    <div class="charts" id="charts3"
+         style="margin-right:10px;width: 300px;height:260px;border-radius: 5px; background-image:linear-gradient(0deg, rgb(220,81,105), rgba(243,141,162,0.91));margin-top: 30px;float: left;"></div>
+    <div class="charts" id="charts4"
+         style="margin-right:10px;width: 300px;height:260px;border-radius: 5px; background-image:linear-gradient(0deg, #eab946, #fee1a7);margin-top: 30px;float: left;"></div>
+</div>
+<script type="text/javascript">
+    // 基于准备好的 dom，初始化 echarts 实例
+    const myChart1 = echarts.init(document.getElementById('charts1'));
+    const myChart2 = echarts.init(document.getElementById('charts2'));
+    const myChart3 = echarts.init(document.getElementById('charts3'));
+    const myChart4 = echarts.init(document.getElementById('charts4'));
+    // 指定图表的配置项和数据
+    const option1 = {
+        title: {
+            text: '学校杜鹃花随月份变化',
+            textStyle:
+                {fontsize: 30}
+        },
+        tooltip: {},
+        legend: {
+            data: ['总数'],
+            x: "right",
+        },
+        xAxis: {
+            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+        },
+        yAxis: {},
+        series: [
+            {
+                name: '总数',
+                type: 'line',
+                data: [5, 20, 30, 45, 60, 80, 110, 140, 230, 80, 40, 20]
+            }
+        ]
+    };
+    const option2 = {
+        title: {
+            text: '学校海棠花随月份变化',
+            textStyle:
+                {fontsize: 30}
+        },
+        tooltip: {},
+        legend: {
+            data: ['总数'],
+            x: "right",
+        },
+        xAxis: {
+            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+        },
+        yAxis: {},
+        series: [
+            {
+                name: '总数',
+                type: 'line',
+                data: [0, 0, 5, 30, 70, 90, 230, 880, 430, 200, 100, 10]
+            }
+        ]
+    };
+    const option3 = {
+        title: {
+            text: '学校月季随月份变化',
+            textStyle:
+                {fontsize: 30}
+        },
+        tooltip: {},
+        legend: {
+            data: ['总数'],
+            x: "right",
+        },
+        xAxis: {
+            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+        },
+        yAxis: {},
+        series: [
+            {
+                name: '总数',
+                type: 'line',
+                data: [0, 0, 5, 20, 25, 35, 40, 60, 35, 20, 5, 0]
+            }
+        ]
+    };
+    const option4 = {
+        title: {
+            text: '学校山茶随月份变化',
+            textStyle:
+                {fontsize: 30}
+        },
+        tooltip: {},
+        legend: {
+            data: ['总数'],
+            x: "right",
+        },
+        xAxis: {
+            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+        },
+        yAxis: {},
+        series: [
+            {
+                name: '总数',
+                type: 'line',
+                data: [0, 0, 10, 25, 50, 80, 100, 50, 20, 10, 5, 0]
+            }
+        ]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart1.setOption(option1);
+    myChart2.setOption(option2);
+    myChart3.setOption(option3);
+    myChart4.setOption(option4);
+</script>
+
+{#图表部分结束#}
 <div class="footer">
     <div class="footer-left">
         <img src="{{ url_for('static', filename='images1/logo.png') }}" style="height: 100px;margin: 20px 0 0 20px;"
@@ -200,23 +329,34 @@
             <tbody>
             <tr>
                 <th style="width:105px;" scope="col">快速选区</th>
-                <td style="width: 227px;text-align: left;" >
-                    <p class="ft-content">1&nbsp;&nbsp;<a href="{{ url_for('main.fenlei', keyword='教学楼') }}" class="link">教学楼</a></p>
-                    <p class="ft-content">2&nbsp;&nbsp;<a href="{{ url_for('main.fenlei', keyword='图书馆') }}" class="link">图书馆</a></p>
-                    <p class="ft-content">3&nbsp;&nbsp;<a href="{{ url_for('main.fenlei', keyword='实验楼') }}" class="link">实验楼</a></p>
-                    <p class="ft-content">4&nbsp;&nbsp;<a href="{{ url_for('main.fenlei', keyword='河岸') }}" class="link">河岸</a></p>
-                    <p class="ft-content">5&nbsp;&nbsp;<a href="{{ url_for('main.fenlei', keyword='服务区') }}" class="link">服务区</a></p>
+                <td style="width: 227px;text-align: left;">
+                    <p class="ft-content">1&nbsp;&nbsp;<a href="{{ url_for('main.fenlei', keyword='教学楼') }}"
+                                                          class="link">教学楼</a></p>
+                    <p class="ft-content">2&nbsp;&nbsp;<a href="{{ url_for('main.fenlei', keyword='图书馆') }}"
+                                                          class="link">图书馆</a></p>
+                    <p class="ft-content">3&nbsp;&nbsp;<a href="{{ url_for('main.fenlei', keyword='实验楼') }}"
+                                                          class="link">实验楼</a></p>
+                    <p class="ft-content">4&nbsp;&nbsp;<a href="{{ url_for('main.fenlei', keyword='河岸') }}"
+                                                          class="link">河岸</a></p>
+                    <p class="ft-content">5&nbsp;&nbsp;<a href="{{ url_for('main.fenlei', keyword='服务区') }}"
+                                                          class="link">服务区</a></p>
                 </td>
                 <th style="width:105px;" scope="col">热搜植物</th>
-                <td style="width: 263px;" >
-                    <p class="ft-content">1&nbsp;&nbsp;<a href="{{ url_for("main.season",id=9)}}" class="link">迎春</a></p>
-                    <p class="ft-content">2&nbsp;&nbsp;<a href="{{ url_for("main.season",id=5)}}" class="link">桃花</a></p>
-                    <p class="ft-content">3&nbsp;&nbsp;<a href="{{ url_for("main.season",id=18)}}" class="link">荷花</a></p>
-                    <p class="ft-content">4&nbsp;&nbsp;<a href="{{ url_for("main.season",id=10)}}" class="link">梅花</a></p>
-                    <p class="ft-content">5&nbsp;&nbsp;<a href="{{ url_for("main.season",id=11)}}" class="link">玉兰</a></p>
+                <td style="width: 263px;">
+                    <p class="ft-content">1&nbsp;&nbsp;<a href="{{ url_for("main.season",id=9) }}" class="link">迎春</a>
+                    </p>
+                    <p class="ft-content">2&nbsp;&nbsp;<a href="{{ url_for("main.season",id=5) }}" class="link">桃花</a>
+                    </p>
+                    <p class="ft-content">3&nbsp;&nbsp;<a href="{{ url_for("main.season",id=18) }}" class="link">荷花</a>
+                    </p>
+                    <p class="ft-content">4&nbsp;&nbsp;<a href="{{ url_for("main.season",id=10) }}" class="link">梅花</a>
+                    </p>
+                    <p class="ft-content">5&nbsp;&nbsp;<a href="{{ url_for("main.season",id=11) }}" class="link">玉兰</a>
+                    </p>
                 </td>
-                <th style="width: 105px;" scope="col"><a href="{{ url_for("user.contribute")}}" class="link">向我投稿</a></th>
-                <td style="width: 150px;" >
+                <th style="width: 105px;" scope="col"><a href="{{ url_for("user.contribute") }}" class="link">向我投稿</a>
+                </th>
+                <td style="width: 150px;">
                     <p class="ft-content">植物照片</p>
                     <p class="ft-content">优美文案</p>
                 </td>
@@ -227,7 +367,7 @@
                     <div class="erweima"><img src="{{ url_for('static', filename='images1/二维码.jpg') }}" alt=""
                                               width="100px"/></div>
                     <div style="position: relative; margin-top: 40px;"><strong>email:</strong><span
-                            style="font-size: 15px;">2233043607@qq.com</span></div>
+                        style="font-size: 15px;">2233043607@qq.com</span></div>
                     <div style="position: relative; margin-top: 5px;">&nbsp;&nbsp;&nbsp;@copyright 星尘工作室</div>
                 </td>
             </tr>
